@@ -13,6 +13,8 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+builder.Services.AddDbContext<EmsDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("mycon")));
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
