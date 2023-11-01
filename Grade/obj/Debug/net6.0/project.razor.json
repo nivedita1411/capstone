@@ -1,6 +1,6 @@
 {
-  "SerializedFilePath": "/home/coder/project/workspace/BDMS/obj/Debug/net6.0/project.razor.json",
-  "FilePath": "/home/coder/project/workspace/BDMS/BDMS.csproj",
+  "SerializedFilePath": "/home/coder/project/workspace/Grade/obj/Debug/net6.0/project.razor.json",
+  "FilePath": "/home/coder/project/workspace/Grade/Grade.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "6.0",
@@ -18371,40 +18371,40 @@
     ],
     "CSharpLanguageVersion": 1000
   },
-  "RootNamespace": "BDMS",
+  "RootNamespace": "Grade",
   "Documents": [
     {
-      "FilePath": "/home/coder/project/workspace/BDMS/Views/Shared/Error.cshtml",
-      "TargetPath": "Views\\Shared\\Error.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/home/coder/project/workspace/BDMS/Views/Shared/_ValidationScriptsPartial.cshtml",
+      "FilePath": "/home/coder/project/workspace/Grade/Views/Shared/_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/coder/project/workspace/BDMS/Views/_ViewImports.cshtml",
-      "TargetPath": "Views\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/home/coder/project/workspace/BDMS/Views/Home/Index.cshtml",
-      "TargetPath": "Views\\Home\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/home/coder/project/workspace/BDMS/Views/_ViewStart.cshtml",
+      "FilePath": "/home/coder/project/workspace/Grade/Views/_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/coder/project/workspace/BDMS/Views/Shared/_Layout.cshtml",
+      "FilePath": "/home/coder/project/workspace/Grade/Views/Shared/Error.cshtml",
+      "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/coder/project/workspace/Grade/Views/Home/Index.cshtml",
+      "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/coder/project/workspace/Grade/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/home/coder/project/workspace/BDMS/Views/Home/Privacy.cshtml",
+      "FilePath": "/home/coder/project/workspace/Grade/Views/_ViewImports.cshtml",
+      "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/coder/project/workspace/Grade/Views/Home/Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
     }
