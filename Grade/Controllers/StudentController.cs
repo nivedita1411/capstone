@@ -60,9 +60,14 @@ namespace Grade.Controllers
                 stud.photo = s.photo;
                 stud.Height = s.Height;
                 stud.Weight = s.Weight;
-                
+
+                context.SaveChanges();
+
+                return RedirectToAction("Index");
 
             }
+
+            return View();
         }
 
         // // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
