@@ -16,7 +16,7 @@ namespace Grade.Models
         public decimal Height {get;set;}
         public float Weight {get;set;}
 
-        public Grade Grade {get;set;}
+        public grade Grade {get;set;}
 
     }
 }

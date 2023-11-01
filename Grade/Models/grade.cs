@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Grade.Models
 {
-    public class grades
+    public class grade
     {
         public int GradeId {get;set;}
         public string GradeName {get;set;}
