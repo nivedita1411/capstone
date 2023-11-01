@@ -70,6 +70,12 @@ namespace Grade.Controllers
             return View();
         }
 
+        public IActionResult DeleteStudent (int Id)
+        {
+            var data = context.student.Find(Id);
+            return View(data);
+        }
+
         // // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         // public IActionResult Error()
         // {
