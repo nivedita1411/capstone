@@ -11,12 +11,17 @@
     <tbody>
         @foreach(var data in Model)
         {
-            <tr>@Html.DisplayNameFor(e=>data.EmpId)</tr>
-            <tr>@Html.DisplayNameFor(e=>data.Name)</tr>
-            <tr>@Html.DisplayNameFor(e=>data.Salary)</tr>
-            <tr>@Html.DisplayNameFor(e=>data.Email)</tr>
-            <tr>@Html.DisplayNameFor(e=>data.Dob)</tr>
+            <tr>
+                <td>@Html.DisplayFor(e=>data.EmpId)</td>
+                <td>@Html.DisplayFor(e=>data.Name)</td>
+                <td>@Html.DisplayFor(e=>data.Salary)</td>
+                <td>@Html.DisplayFor(e=>data.Email)</td>
+                <td>@Html.DisplayFor(e=>data.Dob)</td> 
+            </tr>
+            
         }
     </tbody>
 
 </table>
+<br><br>
+<a asp-controller="Home" asp-action="Index">Home</a>

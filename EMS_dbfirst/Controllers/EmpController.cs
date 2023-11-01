@@ -2,6 +2,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using EMS_dbfirst.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace EMS_dbfirst.Controllers;
 
