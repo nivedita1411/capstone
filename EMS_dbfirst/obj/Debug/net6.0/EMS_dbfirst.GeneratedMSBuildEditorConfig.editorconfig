@@ -19,6 +19,10 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGVwdC9DcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/coder/project/workspace/EMS_dbfirst/Views/Dept/Display.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRGVwdC9EaXNwbGF5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/coder/project/workspace/EMS_dbfirst/Views/Emp/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvRW1wL0NyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

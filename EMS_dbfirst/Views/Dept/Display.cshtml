@@ -1,0 +1,22 @@
+@model IEnumerable<Employee>
+
+<table class = "table">
+    <thead>
+        <th>@Html.DisplayNameFor(e=>e.EmpId)</th>
+        <th>@Html.DisplayNameFor(e=>e.Name)</th>
+        <th>@Html.DisplayNameFor(e=>e.Salary)</th>
+        <th>@Html.DisplayNameFor(e=>e.Email)</th>
+        <th>@Html.DisplayNameFor(e=>e.Dob)</th>
+    </thead>
+    <tbody>
+        @foreach(var data in Model)
+        {
+            <tr>@Html.DisplayNameFor(e=>data.EmpId)</tr>
+            <tr>@Html.DisplayNameFor(e=>data.Name)</tr>
+            <tr>@Html.DisplayNameFor(e=>data.Salary)</tr>
+            <tr>@Html.DisplayNameFor(e=>data.Email)</tr>
+            <tr>@Html.DisplayNameFor(e=>data.Dob)</tr>
+        }
+    </tbody>
+
+</table>

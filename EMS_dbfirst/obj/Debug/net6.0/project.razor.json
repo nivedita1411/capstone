@@ -18399,6 +18399,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/coder/project/workspace/EMS_dbfirst/Views/Dept/Display.cshtml",
+      "TargetPath": "Views\\Dept\\Display.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/coder/project/workspace/EMS_dbfirst/Views/Emp/Create.cshtml",
       "TargetPath": "Views\\Emp\\Create.cshtml",
       "FileKind": "mvc"
