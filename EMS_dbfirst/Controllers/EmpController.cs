@@ -16,8 +16,9 @@ public class EmpController : Controller
 
     public IActionResult List()
 {
-    var data = context.Employees.ToList();
-    return View();
+    // var data = context.Employees.ToList();
+    var data = context.Employees.Include("Dept").ToList();
+    return View(data);
 }
 
 public IActionResult Create ()
