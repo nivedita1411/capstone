@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Grade.Models;
 
 namespace Grade.Controllers
 {
@@ -20,7 +21,7 @@ namespace Grade.Controllers
 
         public IActionResult Index()
         {
-            var data = context.students.Include("Grade").ToList();
+            var data = context.students.ToList();
             return View(data);
         }
 
