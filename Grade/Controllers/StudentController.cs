@@ -75,6 +75,15 @@ namespace Grade.Controllers
             var data = context.student.Find(Id);
             return View(data);
         }
+        [HttpPost]
+        public IActionResult DeleteStudent (student s)
+        {
+            student stude = context.Find(s.Id);
+            context.students.Remove(stude);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
 
         // // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         // public IActionResult Error()
