@@ -2,19 +2,22 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.AspNetCore.Mvc;
 // using Microsoft.EntityFrameworkCore.SqlServer;
+using Grade.Models;
 
 namespace Grade.Models
 {
     public class SGMSDbContext : DbContext
     {
-        public virtual DbSet<student> students {get;set;}
-        public virtual DbSet<grade> grades {get;set;}
+        
 
         public SGMSDbContext () {}
 
         public SGMSDbContext (DbContextOptions<SGMSDbContext> options) : base (options)
         {
         }
+
+        public virtual DbSet<student> students {get;set;}
+        public virtual DbSet<grade> grades {get;set;}
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
