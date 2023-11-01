@@ -18,7 +18,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@Html.DisplayNameFor(e=>e.Id)</td>
+                <td>@Html.DisplayNameFor(e=>e.EmpId)</td>
                 <td>@Html.DisplayNameFor(e=>e.Name)</td>
                 <td>
                     <a asp-controller = "Employee" asp-action = "Display" asp-route-id = item.Id ></a>

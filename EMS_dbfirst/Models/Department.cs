@@ -10,7 +10,7 @@ public partial class Department
     [Display(Name = "Department Name")]
     [Required(ErrorMessage = "Department Name cannot be blank")]
     public string DeptName { get; set; } = null!;
-    []
+    
     public string Location { get; set; } = null!;
 
     public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
