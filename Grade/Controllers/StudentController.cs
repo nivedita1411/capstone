@@ -20,14 +20,55 @@ namespace Grade.Controllers
 
         public IActionResult Index()
         {
-            var data = context.students.Include("GradeName").ToList();
+            var data = context.students.Include("Grade").ToList();
             return View(data);
         }
 
-        // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult AddnewStudent( )
         {
-            return View("Error!");
+            return View();
         }
+        [HttpPost]
+
+        public IActionResult AddnewStudent(student stu)
+        {
+            if(ModelState.IsValid)
+            {
+                context.students.Add(stu);
+                context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(stu);
+
+        }
+
+        public IActionResult UpdateDetails(int Id)
+        {
+            var data = context.students.Find(Id);
+            return View(data);
+        }
+        [HttpPost]
+        public IActionResult UpdateDetails(student s)
+        {
+            if(ModelState.IsValid)
+            {
+                student stud = context.students.Find(s.Id);
+                stud.StudentName = s.StudentName;
+                stud.DOB = s.DOB;
+                stud.photo = s.photo;
+                stud.Height = s.Height;
+                stud.Weight = s.Weight;
+                
+
+            }
+        }
+
+        // // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        // public IActionResult Error()
+        // {
+        //     return View("Error!");
+        // }
     }
 }
