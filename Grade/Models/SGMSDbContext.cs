@@ -8,6 +8,8 @@ namespace Grade.Models
 {
     public class SGMSDbContext : DbContext
     {
+         public virtual DbSet<student> students {get;set;}
+        public virtual DbSet<grade> grades {get;set;}
         
 
         public SGMSDbContext () {}
@@ -16,8 +18,7 @@ namespace Grade.Models
         {
         }
 
-        public virtual DbSet<student> students {get;set;}
-        public virtual DbSet<grade> grades {get;set;}
+       
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
