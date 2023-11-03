@@ -9,7 +9,12 @@ namespace demowebapp.Controllers
     {
         static List<string> Fruits = new List<string> {"Apple","Mango","Orange","Grapes","Banana"};
         [HttpGet]
-        public IEnumerable<string> Get()
+        // public IEnumerable<string> Get()
+        // {
+        //     return Fruits;
+        // }
+        [Route("ShowFruits")]
+        public IEnumerable<string> GetFruits()
         {
             return Fruits;
         }
