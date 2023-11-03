@@ -18,5 +18,10 @@ namespace demowebapp.Controllers
         {
             return Fruits;
         }
+        [HttpGet("{id}")]
+        public string GetFruits(int id)
+        {
+            return Fruits[id];
+        }
     }
 }
