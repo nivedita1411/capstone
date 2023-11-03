@@ -18,7 +18,7 @@ namespace demowebapp.Controllers
         {
             return Fruits;
         }
-        [HttpGet("{id}")]
+        [HttpGet]
         [Route("ShowFruits/{id}")]
         public string GetFruits(int id)
         {
@@ -33,6 +33,18 @@ namespace demowebapp.Controllers
         }
 
         [HttpPut]
-        []
+        [Route("Edit/{id}")]
+        public void Put(int id, [FromBody] string data)
+        {
+            Fruits[id] = data;
+        }
+
+        [HttpDelete]
+        [Route("Kill/{id}")]
+        public void Delete(int id)
+        {
+            Fruits.RemoveAt(id);
+        }
+
     }
 }
