@@ -51,5 +51,31 @@ namespace MovieApp.Controllers
 
             return Created("Record Added", movie); //
         }
+
+        [HttpPut]
+        [Route("EditMovie/{id}")]
+        public IActionResult Put(int id, Movie movie)
+        {
+            if(ModelState.IsValid)
+            {
+                Movie omovie = context.Movies.Find(id);
+                omovie.Name = movie.Name;
+                omovie.Rating = movie.Rating;
+                omovie.ReleaseYear = movie.ReleaseYear;
+                context.SaveChanges();
+                return Ok();
+            }
+
+            return BadRequest("Unable to Edit Record");
+        }
+
+        [HtppDelete]
+        [Route("DeleteMovie/{id}")]
+        public IActionResult Delete(int id)
+        {
+            try{
+                
+            }
+        }
     }
 }
