@@ -19,9 +19,18 @@ namespace MovieApp.Controllers
         }
         [HttpGet]
         [Route("ListMovies/{id}")]
-        
+        public IActionResult Get(int id)
         {
-
+            if(id == null)
+            {
+                return BadRequest("Id cannot be null");
+            }
+            var data = (from m in context.Movies where m.Id == id select m).FirstOrDefault();
+            if(data == null)
+            {
+                return NotFound($"Movie {id} not found");
+            }
+            return Ok(data);
         }
     }
 }
