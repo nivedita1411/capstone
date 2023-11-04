@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MovieApp.Models
 {
-    public class MovieApp
+    public class Movie
     {
         [Key]
         public int Id {get;set;}
