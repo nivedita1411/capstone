@@ -9,6 +9,19 @@ namespace MovieApp.Controllers
     [Route("/[controller]")]
     public class MovieController : ControllerBase
     {
+        MovieContext context = new MovieContext();
+        [HttpGet]
+        [Route("ListMovies")]
+        public IActionResult Get()
+        {
+            var data = from m in context.Movies select m;
+            return Ok(data);
+        }
+        [HttpGet]
+        [Route("ListMovies/{id}")]
         
+        {
+
+        }
     }
 }
