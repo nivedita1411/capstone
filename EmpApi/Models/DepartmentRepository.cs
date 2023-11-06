@@ -15,7 +15,8 @@ namespace EmpApi.Models
         public void DeleteDept(int id)
         {
             Department d = context.Departments.Find(id);
-            context.Departments.Remove()
+            context.Departments.Remove(d);
+            context.SaveChanges();
 
         }
 
