@@ -21,5 +21,16 @@ namespace EmpApi.Controllers
             var data = repo.GetDepartments();
             return Ok(data);
         }
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult PostDept(Department dept)
+        {
+            if(ModelState.IsValid)
+            {
+                repo.AddDept(dept);
+                return Created("Record Added",dept);
+            }
+            return BadRequest();
+        }
     }
 }
