@@ -9,6 +9,17 @@ namespace EmpApi.Controllers
     [Route("[controller]")]
     public class DepartmentController : ControllerBase
     {
-        [IDept]
+        IDept repo;
+        public DepartmentController(IDept _repo)
+        {
+            this.repo = _repo;
+        }
+        [HttpGet]
+        [Route("ListDept")]
+        public IActionResult GetDept()
+        {
+            var data = repo.GetDepartments();
+            return Ok(data);
+        }
     }
 }
