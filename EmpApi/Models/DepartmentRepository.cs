@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmpApi.Models
 {
-    public class DepartmentRepository:IDept
+    public class DepartmentRepository: IDept
     {
         EmsdatabaseContext context = new EmsdatabaseContext();
         public void AddDept(Department d)
@@ -22,7 +23,7 @@ namespace EmpApi.Models
 
         public void EditDept(Department d)
         {
-            Department dept = context.Departments.Find(d.id);
+            Department dept = context.Departments.Find(d.Id);
             dept.DeptName = d.DeptName;
             dept.Location = d.Location;
             context.SaveChanges();

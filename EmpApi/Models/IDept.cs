@@ -5,7 +5,7 @@ namespace EmpApi.Models
     public interface IDept
     {
         List<Department> GetDepartments();
-        Department FindDepartment(int id);
+        Department FindDept(int id);
         void AddDept(Department d);
         void EditDept (Department d);
         void DeleteDept(int id);

@@ -1,6 +1,6 @@
 using EmpApi.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Linq;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
 namespace EmpApi.Controllers
@@ -32,5 +32,7 @@ namespace EmpApi.Controllers
             }
             return BadRequest();
         }
+        [HttpGet]
+        [Route("List")]
     }
 }
