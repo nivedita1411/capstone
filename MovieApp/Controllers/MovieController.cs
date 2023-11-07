@@ -10,6 +10,33 @@ namespace MovieApp.Controllers
     public class MovieController : ControllerBase
     {
         MovieContext context = new MovieContext();
+
+        [HttpGet]
+        [Route("DisplayMovies/Rating/Year")]
+        public IActionResult GetDisplayMovies(int rating, int year)
+        {
+            var data = from m in context.Movies where m.Rating == rating && m.ReleaseYear == year select m;
+            if(data.Count() == 0)
+            {
+                return NotFound($"Movies in {rating} for the Year {year}");
+            }
+            return Ok(data);
+        }
+
+        //Query String Parameters
+
+        [HttpGet]
+        [Route("DisplayByRating")]
+        public IActionResult GetDisplayByRating([FromQuery] int rating)
+        {
+            var data = context.Movies.Where(m => m.Rating == rating);
+            if(data.Count() == 0)
+            {
+                return NotFound($"No movies in rating {rating}");
+            }
+            return Ok(data);
+        }
+
         [HttpGet]
         [Route("ListMovies")]
         public IActionResult Get()
@@ -91,5 +118,7 @@ namespace MovieApp.Controllers
 
             }
         }
+
+
     }
 }

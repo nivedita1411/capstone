@@ -6,6 +6,7 @@ namespace MovieApp.Models
     {
         public virtual DbSet<Movie> Movies {get;set;}
         public virtual DbSet<Detail> Details {get;set;}
+        public virtual DbSet<Movie_VM> Movie_VM {get}
 
         public MovieContext () {}
 
