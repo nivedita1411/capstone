@@ -10,8 +10,11 @@
                 <!-- <th>Id</th> -->
             </thead>
             <tbody>
-                <tr >
-
+                <tr *ngFor = "let m of moviedata">
+                    <td>{{m.id}}</td>
+                    <td>{{m.name}}</td>
+                    <td>{{m.rating}}</td>
+                    <td>{{m.yearRelease}}</td>
                 </tr>
             </tbody>
         </table>
