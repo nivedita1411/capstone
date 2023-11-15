@@ -32,7 +32,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseRouting();
+
 app.UseCors();
 app.UseAuthorization();
 app.MapControllers();
