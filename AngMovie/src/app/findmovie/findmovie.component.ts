@@ -16,6 +16,10 @@ export class FindmovieComponent implements OnInit {
 
   ngOnInit() {
     const tid = this.ar.snapshot.paramMap.get('id')
+    this.id = Number(tid)
+    this.movieservice.getMovie(this.id).subscribe((data:IMovie) => {
+      this.moviedata = data
+    })
   }
 
 }
