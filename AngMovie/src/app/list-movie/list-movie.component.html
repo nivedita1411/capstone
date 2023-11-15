@@ -15,6 +15,9 @@
                     <td>{{m.name}}</td>
                     <td>{{m.rating}}</td>
                     <td>{{m.yearRelease}}</td>
+                    <td>
+                        <a [routerLink] = "['/find/',m.id]">Details</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
