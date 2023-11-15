@@ -12,12 +12,13 @@ builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("mycon");
 builder.Services.AddDbContext<MovieContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddCors(
-    options => options.AddDefaultPolicy(
-        builder => {
-            builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-        }
-    )
-)
+options => 
+{
+    options.AddDefaultPolicy(
+    builder => {
+        builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+    });
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -31,9 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseRouting();
+app.UseCors();
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
