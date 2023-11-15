@@ -5,7 +5,7 @@ import { FindmovieComponent } from './findmovie/findmovie.component';
 
 
 const routes: Routes = [
-  {path : 'listmovies',component:ListMovieComponent}
+  {path : 'listmovies',component:ListMovieComponent},
   {path : 'find/id', component:FindmovieComponent}
 ];
 
