@@ -1,1 +1,13 @@
-<p>findmovie works!</p>
+<!-- <p>findmovie works!</p> -->
+
+<h3>Details of Movie  {{moviedata.name}} </h3>
+<div style = "background-color: lawngreen;">
+    Id: {{moviedata.id}}<br>
+    Name: {{moviedata.name}}<br>
+    Year: {{moviedata.releaseYear}}<br>
+    Rating: {{moviedata.rating}}<br>
+</div>
+<br>
+<br>
+<a [routerLink] = "['/listmovies']">Back To List</a>
+
