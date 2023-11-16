@@ -1,6 +1,6 @@
 export interface IMovie {
     id:number
     name:string
-    releaseYear:string
-    rating:string
+    releaseYear:number
+    rating:number
 }

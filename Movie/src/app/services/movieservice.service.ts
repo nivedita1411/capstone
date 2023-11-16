@@ -24,5 +24,7 @@ export class MovieserviceService {
   }
 
   httpOptions = {headers:new HttpHeaders({'Content-type':'application/json'})}
-  addMovie(moviedata:IMovie):
+  addMovie(moviedata:IMovie):Observable<IMovie>{
+    return this.httpclient.post<IMovie>(this.url+'/AddMovie',moviedata,this.httpOptions)
+  }
 }
