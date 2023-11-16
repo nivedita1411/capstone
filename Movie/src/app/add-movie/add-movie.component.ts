@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieserviceService } from '../services/movieservice.service';
 import { IMovie } from '../model/imovie';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-movie',
@@ -10,7 +11,7 @@ import { IMovie } from '../model/imovie';
 export class AddMovieComponent implements OnInit {
   moviedata: IMovie = {id:0,name:'',releaseYear:0,rating:0}
 
-  constructor(private ms: MovieserviceService, private route:Rou) { }
+  constructor(private ms: MovieserviceService, private route:Router) { }
 
   saveData(movie:IMovie):void{
     this.moviedata = movie
