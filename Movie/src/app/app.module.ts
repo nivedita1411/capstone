@@ -8,6 +8,8 @@ import { FindmovieComponent } from './findmovie/findmovie.component';
 import { MenuComponent } from './menu/menu.component';
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import { FormsModule } from '@angular/forms';
+import { EditmovieComponent } from './editmovie/editmovie.component';
+import { DeletemovieComponent } from './deletemovie/deletemovie.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { FormsModule } from '@angular/forms';
     ListmovieComponent,
     FindmovieComponent,
     MenuComponent,
-    AddMovieComponent
+    AddMovieComponent,
+    EditmovieComponent,
+    DeletemovieComponent
   ],
   imports: [
     BrowserModule,
