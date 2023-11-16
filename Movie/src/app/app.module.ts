@@ -7,6 +7,7 @@ import { ListmovieComponent } from './listmovie/listmovie.component';
 import { FindmovieComponent } from './findmovie/findmovie.component';
 import { MenuComponent } from './menu/menu.component';
 import { AddMovieComponent } from './add-movie/add-movie.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AddMovieComponent } from './add-movie/add-movie.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
