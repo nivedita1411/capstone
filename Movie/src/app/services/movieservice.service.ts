@@ -27,4 +27,9 @@ export class MovieserviceService {
   addMovie(moviedata:IMovie):Observable<IMovie>{
     return this.httpclient.post<IMovie>(this.url+'/AddMovie',moviedata,this.httpOptions)
   }
+
+  editMovie(moviedata:IMovie):Observable<IMovie>
+  {
+    return this.httpclient.put<IMovie>(this.url + '/EditMovie/'+ moviedata.id,moviedata,this.httpOptions)
+  }
 }

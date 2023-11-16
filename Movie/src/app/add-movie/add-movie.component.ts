@@ -19,6 +19,7 @@ export class AddMovieComponent implements OnInit {
       ()=>{
         alert('Record Added Successfully')
         this.route.navigate(['/listmovies'])
+        
       }
     )
 
