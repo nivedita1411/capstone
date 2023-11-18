@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IDetail } from '../model/idetail';
+import { Idetails } from '../model/idetail';
+import { MovieserviceService } from '../services/movieservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-createdetails',
@@ -7,11 +9,26 @@ import { IDetail } from '../model/idetail';
   styleUrls: ['./createdetails.component.css']
 })
 export class CreatedetailsComponent implements OnInit {
-  detailsdata: IDetail = {}
+  detailsdata: Idetails = {detailid:0, Actor:'', MovieId:0, Gender:'',Role: ''}
+  showdata: any[] = []
 
-  constructor() { }
+  constructor(private ms: MovieserviceService, private router: Router) { }
+
+  savedata(data : Idetails):void{
+    this.detailsdata = data 
+    this.ms.addDetails(this.detailsdata).subscribe(
+      ()=> {
+        alert('Record Added Successfully')
+        this.router.navigate(['/listmovies'])
+      }
+    )
+  }
+  
+  
+  
 
   ngOnInit() {
+    this.ms.getAllMovies().subscribe(data => {this.showdata.push(...data) })
   }
 
 }
