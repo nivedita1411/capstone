@@ -3,7 +3,9 @@ import { IMovie } from '../model/imovie';
 import {HttpClient , HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { Idetails } from '../model/idetail';
-import {catchError} from 
+import { HttpHandler } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +48,7 @@ export class MovieserviceService {
 
   handleError(error:HttpErrorResponse)
   {
-    errmsg = error.status + '\n' + error.statusText + '\n' + error.error
+    var errmsg = error.status + '\n' + error.statusText + '\n' + error.error
     alert(errmsg)
     return throwError(errmsg)
   }
