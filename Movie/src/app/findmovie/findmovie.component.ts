@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieserviceService } from '../services/movieservice.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IMovie } from '../model/imovie';
 
 @Component({
@@ -10,7 +10,7 @@ import { IMovie } from '../model/imovie';
 })
 export class FindmovieComponent implements OnInit {
 
-  constructor(private ms:MovieserviceService, private ar: ActivatedRoute) { }
+  constructor(private ms:MovieserviceService, private ar: ActivatedRoute, private router: Router) { }
 
   moviedata:IMovie
   id:number
