@@ -10,7 +10,7 @@ import { Idetails } from '../model/idetail';
 export class MovieserviceService {
 
   private url = "https://8080-bacdcffabcaaaceeafebeccaddbefddaf.premiumproject.examly.io/Movie"
-  private url2 = "https://8080-bacdcffabcaaaceeafebeccaddbefddaf.premiumproject.examly.io/Details"
+  private url2 = "https://8080-bacdcffabcaaaceeafebeccaddbefddaf.premiumproject.examly.io/Detail"
   // id:number
 
   constructor( private  httpclient:HttpClient) { }
@@ -40,7 +40,7 @@ export class MovieserviceService {
   }
 
   addDetails(detailsdata: Idetails) :Observable<Idetails>{
-    return this.httpclient.post<Idetails>(this.url2 + 'AddDetails',detailsdata, this.httpOptions)
+    return this.httpclient.post<Idetails>(this.url2 + '/AddMovieDetails',detailsdata, this.httpOptions)
   }
 }
 
