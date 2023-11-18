@@ -10,6 +10,7 @@ import { AddMovieComponent } from './add-movie/add-movie.component';
 import { FormsModule } from '@angular/forms';
 import { EditmovieComponent } from './editmovie/editmovie.component';
 import { DeletemovieComponent } from './deletemovie/deletemovie.component';
+import { CreatedetailsComponent } from './createdetails/createdetails.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DeletemovieComponent } from './deletemovie/deletemovie.component';
     MenuComponent,
     AddMovieComponent,
     EditmovieComponent,
-    DeletemovieComponent
+    DeletemovieComponent,
+    CreatedetailsComponent
   ],
   imports: [
     BrowserModule,

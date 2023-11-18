@@ -36,5 +36,7 @@ export class MovieserviceService {
   {
     return this.httpclient.delete<IMovie>(this.url + '/DeleteMovie/' + id) 
   }
+
+  
 }
 
