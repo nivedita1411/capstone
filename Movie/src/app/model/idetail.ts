@@ -1,8 +1,8 @@
 export interface Idetails {
     detailid:number
-    Actor:string
-    MovieId:number
-    Gender:string
-    Role:string
+    actor:string
+    movieid:number
+    gender:string
+    role:string
  
 }

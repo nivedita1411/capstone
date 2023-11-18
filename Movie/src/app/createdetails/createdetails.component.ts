@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./createdetails.component.css']
 })
 export class CreatedetailsComponent implements OnInit {
-  detailsdata: Idetails = {detailid:0, Actor:'', MovieId:0, Gender:'',Role: ''}
+  detailsdata: Idetails = {detailid:0, actor:'', movieid:0, gender:'',role: ''}
   showdata: any[] = []
 
   constructor(private ms: MovieserviceService, private router: Router) { }
