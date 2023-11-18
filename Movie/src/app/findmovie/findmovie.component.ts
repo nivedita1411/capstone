@@ -23,5 +23,9 @@ export class FindmovieComponent implements OnInit {
       this.moviedata = data;
     })
   }
+  Show()
+  {
+    this.router.navigate(['/listmovies'])
+  }
 
 }
