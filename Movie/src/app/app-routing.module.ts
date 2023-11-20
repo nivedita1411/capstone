@@ -6,10 +6,12 @@ import { AddMovieComponent } from './add-movie/add-movie.component';
 import { EditmovieComponent } from './editmovie/editmovie.component';
 import { DeletemovieComponent } from './deletemovie/deletemovie.component';
 import { CreatedetailsComponent } from './createdetails/createdetails.component';
+import { AuthGuard } from './guard/auth.guard';
+import { AuthService } from './services/auth.service';
 
 
 const routes: Routes = [
-  {path: 'listmovies',component:ListmovieComponent},
+  {path: 'listmovies',component:ListmovieComponent, canActivate:[AuthGuard]},
   {path:'find/:id',component:FindmovieComponent},
   {path:'add',component:AddMovieComponent},
   {path:'edit/:id',component:EditmovieComponent},
