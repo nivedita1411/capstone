@@ -11,10 +11,10 @@ namespace jwtapi.Models
         public AppdbContext() { }
         public AppdbContext(DbContextOptions<AppdbContext> options) : base(options) { }
         
-        public DbSet<User> Users { get; set; }
+        public DbSet<user> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<User>().ToTable("users");
+            builder.Entity<user>().ToTable("users");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

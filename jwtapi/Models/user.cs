@@ -25,4 +25,9 @@ namespace jwtapi.Models
 
         public DateTime RefreshTokenExpiryTime { get; set; }
     }
+
+    public class TokenApi {
+        public string AccessToken {get; set;} = string.Empty;
+        public string RefreshToken {get; set;} = string.Empty;
+    }
 }
