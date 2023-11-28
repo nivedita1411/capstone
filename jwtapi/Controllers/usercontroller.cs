@@ -32,6 +32,24 @@ namespace jwtapi.Controllers
             {
                 return DllNotFoundException(new {Message = "User Not Found"});
             }
+            user.Token=CreateJwt(user);
+            var newAccessToken=user.Token;
+            user.RefreshToken=CreateRefreshToken();
+            user.RefreshTokenExpiryTime=DateTime.Now.AddDays(2);
+            await _authContext.SaveChangesAsync();
+            return OK(new TokenApi(){
+                AccessToken=newAccessToken,
+                RefreshToken=newRefreshToken
+            });
+
+            [HttpPost("register")]
+            public async Task<IActionResult> AddUser([FromBody] user userObj)
+            {
+                if(userObj == null) return BadRequest();
+                userObj.Role="user";
+                userObj.Token="";
+                await _
+            }
         }
     }
 }
