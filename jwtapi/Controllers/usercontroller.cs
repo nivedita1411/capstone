@@ -48,7 +48,9 @@ namespace jwtapi.Controllers
                 if(userObj == null) return BadRequest();
                 userObj.Role="user";
                 userObj.Token="";
-                await _
+                await _authContext.Users.AddAsync(userObj);
+                await _authContext.SaveChanges();
+                return Ok(new {Status=200,Message="User Added"});
             }
         }
     }
