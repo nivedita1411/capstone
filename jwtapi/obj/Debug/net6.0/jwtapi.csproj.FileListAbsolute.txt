@@ -1,0 +1,7 @@
+/home/coder/project/workspace/jwtapi/obj/Debug/net6.0/jwtapi.csproj.AssemblyReference.cache
+/home/coder/project/workspace/jwtapi/obj/Debug/net6.0/jwtapi.GeneratedMSBuildEditorConfig.editorconfig
+/home/coder/project/workspace/jwtapi/obj/Debug/net6.0/jwtapi.AssemblyInfoInputs.cache
+/home/coder/project/workspace/jwtapi/obj/Debug/net6.0/jwtapi.AssemblyInfo.cs
+/home/coder/project/workspace/jwtapi/obj/Debug/net6.0/jwtapi.csproj.CoreCompileInputs.cache
+/home/coder/project/workspace/jwtapi/obj/Debug/net6.0/jwtapi.MvcApplicationPartsAssemblyInfo.cs
+/home/coder/project/workspace/jwtapi/obj/Debug/net6.0/jwtapi.MvcApplicationPartsAssemblyInfo.cache
