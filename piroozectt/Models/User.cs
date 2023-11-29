@@ -13,7 +13,7 @@ namespace capstoneapi.Models
         // [EmailAddress("Email")]
         public string? Email{get;set;}
 
-       
+       public virtual ICollection<Booking> Booking {get;set;}
        
        
        

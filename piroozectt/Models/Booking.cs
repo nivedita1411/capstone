@@ -26,6 +26,8 @@ namespace capstoneapi.Models
         [ForeignKey("Event")]
  
         public int EventId{get;set;}
+
+        public 
  
        
     }
