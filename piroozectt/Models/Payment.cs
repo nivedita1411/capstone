@@ -18,6 +18,8 @@ namespace capstoneapi.Models
         public string Event{get;set;}
         public DateTime PaymentDate{get;set;}
         public int TotalAmt{get;set;}
+
+        public Booking Booking {get; set;}
  
  
  
