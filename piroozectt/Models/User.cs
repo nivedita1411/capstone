@@ -12,6 +12,8 @@ namespace capstoneapi.Models
         public string MobileNumber{get;set;}
         // [EmailAddress("Email")]
         public string? Email{get;set;}
+
+       
        
        
        
