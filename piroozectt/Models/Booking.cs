@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
-namespace capstoneapi.Models
+namespace piroozectt.Models
 {
     public class Booking{
         [Key]
@@ -27,7 +27,10 @@ namespace capstoneapi.Models
  
         public int EventId{get;set;}
 
-        public 
+        public Event Event {get;set;}
+        public User User {get;set;}
+
+        
  
        
     }
