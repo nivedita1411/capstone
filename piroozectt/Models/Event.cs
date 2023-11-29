@@ -7,7 +7,7 @@ namespace piroozectt.Models
 {
     public class Event{
         [Key]
-        public int? EventId{get;set;}
+        public int EventId{get;set;}
         public string? EventType{get;set;}
         public string? Description{get;set;}
         public string? Package{get;set;}

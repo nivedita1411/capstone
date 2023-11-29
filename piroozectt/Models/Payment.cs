@@ -6,7 +6,7 @@ namespace piroozectt.Models
 {
     public class Payment{
         [Key]
-        public int? PaymentId{get;set;}
+        public int PaymentId{get;set;}
         [ForeignKey("Booking")]
         public int? BookingId{get;set;}
         public int? OrganizerId{get;set;}
@@ -19,7 +19,7 @@ namespace piroozectt.Models
         public DateTime PaymentDate{get;set;}
         public int TotalAmt{get;set;}
 
-        public Booking Booking {get; set;}
+        public Booking? Booking {get; set;}
  
  
  

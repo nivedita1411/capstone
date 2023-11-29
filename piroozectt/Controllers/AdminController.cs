@@ -12,39 +12,9 @@ namespace piroozectt.Controllers
     public class Admin : ControllerBase
     {
 
-        [HttpPut]
-        [Route("UpdateEvent/{id}")]
-        public IActionResult PutEvent(int id, Event event)
-        {
-            try
-            {
-                context.
-            }
-            catch (System.Exception)
-            {
-                
-                throw;
-            }
-        }
-
-        public IActionResult DeleteEvent (int id)
-        {
-            try
-            {
-                if(id == null)
-                {
-                    throw 
-                }
-                context.DeleteEvent()
-            }
-            catch (System.Exception)
-            {
-                
-                throw;
-            }
-        }
-        [HttpDelete]
-        [Route("DeleteDept/{id}")]
+        
+        
+        
         public IActionResult DeleteDept(int id)
         {
             repo.DeleteDept(id);
@@ -79,10 +49,5 @@ IDept repo;
             return BadRequest();
         }
         
-        [Route("ListDept/{id}")]
-        public IActionResult GetDept (int id)
-        {
-            var data = repo.FindDept(id);
-            return Ok(data);
-        }
+        
         
