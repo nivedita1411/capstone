@@ -117,6 +117,12 @@ namespace EventBooking.Controllers
         }
 
         [HttpGet]
-        [Route("/admin/event/{}")]
+        [Route("/admin/event/{eventtype}")]
+
+        public IActionResult GetEventByType(string eventtype)
+        {
+            var data = context.Events.Where(e => e.EventType == eventtype).ToList();
+            return Ok(data);
+        }
     }
 }
