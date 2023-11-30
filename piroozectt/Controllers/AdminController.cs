@@ -126,9 +126,10 @@ namespace EventBooking.Controllers
         }
         [HttpPut]
         [Route("/admin/booking/changestatus/{bookingId}")]
-        public IActionResult BookingStatus(int bookingId,)
+        public IActionResult BookingChangeStatus(int bookingId)
         {
-            
+            Booking b = context.Bookings.Find(bookingId);
+            b.BookingStatus = 
         }
         [HttpGet]
         [Route("/admin/booking/{bookingId}")]
