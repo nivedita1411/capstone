@@ -4,6 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using piroozectt.Models;
+
+
+//  Register
+// 2.     Login
+// 3.     Post Event details
+// 4.     Edit Event Details
+// 5.     Delete Event Details
+// 6.     View All Events
+// 7.     View All Bookings
+// 8.     View All Payments
+// 9.     Logout
  
 namespace EventBooking.Controllers
 {
@@ -12,6 +23,16 @@ namespace EventBooking.Controllers
     public class AdminController : ControllerBase
     {
         AppDbContext context=new AppDbContext();
+
+
+        [HttpGet]
+        [Route("ListEvents")]
+        public IActionResult GetEvent()
+        {
+            // var data=context.Movies.ToList();
+            var data=from m in context.Events select m;
+            return Ok(data);
+        }
  
         [HttpGet]
         [Route("ListBookings")]
@@ -23,13 +44,13 @@ namespace EventBooking.Controllers
         }
  
         [HttpPost]
-        [Route("AddBooking")]
-        public IActionResult PostBooking(Booking Booking)
+        [Route("AddEvent")]
+        public IActionResult PostBooking(Event e)
         {
             if(ModelState.IsValid)
             {
                 try{
-                    context.Bookings.Add(Booking);
+                    context.Events.Add(e);
                     context.SaveChanges();
  
                 }
@@ -38,16 +59,20 @@ namespace EventBooking.Controllers
  
                 }
             }
-            return Created("Record Added", Booking);
+            return Created("Record Added", e);
  
         }
  
         [HttpPut]
         [Route("EditEvent/{id}")]
-        public IActionResult PutBooking(int id, Booking Booking)
+        public IActionResult PutBooking(int id, Event e)
         {
             if(ModelState.IsValid)
             {
+                Event ev = context.Events.Find(id);
+                ev.EventType
+                ev.Description
+                ev.
                 Booking b = context.Bookings.Find(id);
                 b.BookingStatus = Booking.BookingStatus;
                 
