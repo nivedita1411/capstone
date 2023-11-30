@@ -26,7 +26,7 @@ namespace EventBooking.Controllers
 
 
         [HttpGet]
-        [Route("ListEvents")]
+        [Route("/event")]
         public IActionResult GetEvent()
         {
             // var data=context.Movies.ToList();
@@ -44,7 +44,7 @@ namespace EventBooking.Controllers
         }
  
         [HttpPost]
-        [Route("AddEvent")]
+        [Route("/event")]
         public IActionResult PostBooking(Event e)
         {
             if(ModelState.IsValid)
@@ -65,22 +65,22 @@ namespace EventBooking.Controllers
  
         [HttpPut]
         [Route("EditEvent/{id}")]
-        public IActionResult PutBooking(int id, Event e)
+        public IActionResult PutEvent(int id, Event e)
         {
             if(ModelState.IsValid)
             {
                 Event ev = context.Events.Find(id);
-                ev.EventType
-                ev.Description
-                ev.
-                Booking b = context.Bookings.Find(id);
-                b.BookingStatus = Booking.BookingStatus;
+                ev.EventType = e.EventType;
+                ev.Description = e.Description;
+                ev.Package = e.Package;
+                ev.Charges = e.Charges;
+                
                 
                 context.SaveChanges();
                 return Ok();
  
             }
-            return BadRequest("Unable to Edit Booking");
+            return BadRequest("Unable to Edit Event");
         }
 
         [HttpDelete]
@@ -95,7 +95,7 @@ namespace EventBooking.Controllers
                     return NotFound();
                 }
  
-                context.Bookings.Remove(data);
+                context.Events.Remove(data);
                 context.SaveChanges();
                 return Ok();
             }
@@ -106,3 +106,14 @@ namespace EventBooking.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet]
+        [Route("ListPayments")]
+        public IActionResult GetPayment()
+        {
+            // var data=context.Movies.ToList();
+            var data=from m in context.Payments select m;
+            return Ok(data);
+        }
+    }
+}
