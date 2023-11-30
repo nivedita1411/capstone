@@ -124,5 +124,30 @@ namespace EventBooking.Controllers
             var data = context.Events.Where(e => e.EventType == eventtype).ToList();
             return Ok(data);
         }
+        [HttpPut]
+        [Route("/admin/booking/changestatus/{bookingId}")]
+        public IActionResult BookingStatus(int bookingId,)
+        {
+            
+        }
+        [HttpGet]
+        [Route("/admin/booking/{bookingId}")]
+        public IActionResult GetBookingById(int bookingId)
+        {
+            try
+            {
+                var data = context.Bookings.Find(bookingId);
+                if(data == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception e)
+            {
+                
+                return BadRequest(e.Message);
+            }
+            
+        }
     }
 }
