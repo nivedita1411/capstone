@@ -19,7 +19,7 @@ using piroozectt.Models;
 namespace EventBooking.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api")]
     public class AdminController : ControllerBase
     {
         AppDbContext context=new AppDbContext();
@@ -64,12 +64,12 @@ namespace EventBooking.Controllers
         }
  
         [HttpPut]
-        [Route("EditEvent/{id}")]
-        public IActionResult PutEvent(int id, Event e)
+        [Route("/admin/updateevent/{eventId}")]
+        public IActionResult PutEvent(int eventId, Event e)
         {
             if(ModelState.IsValid)
             {
-                Event ev = context.Events.Find(id);
+                Event ev = context.Events.Find(eventId);
                 ev.EventType = e.EventType;
                 ev.Description = e.Description;
                 ev.Package = e.Package;
@@ -84,10 +84,10 @@ namespace EventBooking.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteEvent/{id}")]
-        public IActionResult DeleteEvent (int id)
+        [Route("/admin/DeleteEvent/{eventId}")]
+        public IActionResult DeleteEvent (int eventId)
         {
-            var data = context.Bookings.Find(id);
+            var data = context.Bookings.Find(eventId);
             try
             {
                 if(data == null)
@@ -115,5 +115,8 @@ namespace EventBooking.Controllers
             var data=from m in context.Payments select m;
             return Ok(data);
         }
+
+        [HttpGet]
+        [Route("/admin/event/{}")]
     }
 }
