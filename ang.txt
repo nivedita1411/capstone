@@ -825,3 +825,962 @@ export class JobPostingFormComponent implements OnInit {
 onSubmit() {
     // if(this.scheduleForm.valid) {
     // }
+
+
+viewbag
+<select asp-for="DeptId" asp-items="ViewBag.DeptId">
+            <option value=''>Choose Departments</option>
+        </select>
+
+-------------------------------------------------------------------------
+
+[Index("Id",IsUnique=true)]
+
+ViewBag.DeptId = new SelectList(context.Departments,"Id","DepartmentName");
+
+@Html.DropDownList(m=>m.Event.ID,ViewBag.EventID as SelectList, "ID","EventName")
+
+--------------------------------------------------------------
+
+builder.Services.AddDbContext<EmsDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection"))); - program.cs
+------------------------------------------------------------------
+void ShowDisconnect()
+{
+    string connectionString = "User ID=sa;password=examlyMssql@123; server=localhost;Database=MyDatabaseNY;trusted_connection=false;Persist Security Info=False;Encrypt=False";
+    string cmdtext = "insert into product values(@id,@name,@price,@stock)";
+    SqlConnection connection = null;
+    SqlDataAdapter adapter = null;
+    DataSet ds = null;
+    DataTable prodTable = null;
+    try
+    {
+        ds = new DataSet();
+        connection = new SqlConnection(connectionString);
+        adapter = new SqlDataAdapter("select * from product", connection); //only select commands can be given in adapter
+        adapter.Fill(ds,"Prods");
+        prodTable = ds.Tables["Prods"];
+        Console.WriteLine($"Rows = {prodTable.Rows.Count}");
+        Console.WriteLine($"Columns = {prodTable.Columns.Count}");
+        foreach(DataRow row in prodTable.Rows)
+        {
+            Console.WriteLine($"{row["id"]} -- {row["name"]} -- {row["price"]} -- {row["stock"]}");
+        }
+
+    }
+    catch (Exception ex)
+    {
+        
+        Console.WriteLine(ex.Message);
+    }
+-------------------------------------------------------
+
+sh run.sh
+---------------------------------------------------------
+model :
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
+
+namespace EMS_dbfirst.Models;
+
+public partial class Department
+{
+    public int Id { get; set; }
+    [Display(Name = "Department Name")]
+    [Required(ErrorMessage = "Department Name cannot be blank")]
+    public string DeptName { get; set; } = null!;
+    
+    public string Location { get; set; } = null!;
+
+    public virtual ICollection<Employee> Employees { get; set; } 
+}
+
+public virtual grade(class) grade {get;set;}
+---------------------------------
+
+    [DataType(DataType.Date)]
+    [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+    [DobCheck(ErrorMessage = "Atleast 25 years of age required")]
+-----------------
+where : 
+public IActionResult DisplayBooksForLibraryCard(int id)
+        {
+            var data=context.Books.Where(e=>e.Id==id);
+             return View(data);
+        }
+-----------------------------
+Regular Expression
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+// using dotnetapp.Attributes; // Replace with the actual namespace
+ 
+namespace dotnetapp.Models
+{
+    // Write youe LibraryCard class here...
+    public class LibraryCard
+    {
+        [Key]
+        public int Card_Id{get;set;}
+        [RegularExpression(@"LC-\d{5}", ErrorMessage="Card Number should be of Format LC-XXXXX")]
+        public string CardNumber{get;set;}
+        [Required(ErrorMessage="Member name should not be empty")]
+        [MaxLength(100)]
+        public string? MemberName{get;set;}
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode=true,DataFormatString= "{0:yyyy/MM/dd}")]
+        [Range(typeof(DateTime),"Now","2050/12/12")]
+        public DateTime ExpiryDate{get;set;}
+ 
+        public ICollection<Book>? Books{get;set;}
+ 
+    }
+}
+
+-----------------------------------------------------------------
+
+public IActionResult Create ()
+{
+    //dropdown for deptname
+    ViewBag.DeptId = new SelectList(context.Departments,"Id","DepartmentName");
+    return View();
+}
+-----------------------------------
+using System.ComponentModel.DataAnnotations;
+namespace EMS_dbfirst.Models;
+
+public class DobCheck: ValidationAttribute
+{
+    public override bool IsValid(object value)
+    {
+        DateTime birthdate = Convert.ToDateTime(value);
+        int year = birthdate.Year;
+        int currentyear = DateTime.Now.Year;
+        if(currentyear-year >= 25)
+        {
+            return true;
+        }
+        else return false;
+    }
+}
+
+DBContext--------------------------------------
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.AspNetCore.Mvc;
+// using Microsoft.EntityFrameworkCore.SqlServer;
+using Grade.Models;
+
+namespace Grade.Models
+{
+    public class SGMSDbContext : DbContext
+    {
+         public virtual DbSet<student> students {get;set;}
+        public virtual DbSet<grade> grades {get;set;}
+        
+
+        public SGMSDbContext () {}
+
+        public SGMSDbContext (DbContextOptions<SGMSDbContext> options) : base (options)
+        {
+        }
+
+       
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if(!optionsBuilder.IsConfigured){
+                optionsBuilder.UseSqlServer("User ID=sa;password=examlyMssql@123; server=localhost;Database=SGMSDb;trusted_connection=false;Persist Security Info=False;Encrypt=False;");
+            }
+ 
+        }
+    }
+}
+
+----------------------------------crud
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Grade.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace Grade.Controllers
+{
+    
+    public class StudentController : Controller
+    {
+        private readonly SGMSDbContext context;
+
+        public StudentController(SGMSDbContext _context)
+        {
+            context = _context;
+        }
+
+        public IActionResult Index()
+        {
+            var data = context.students.ToList();
+            return View(data);
+        }
+
+        public IActionResult AddnewStudent( )
+        {
+            return View();
+        }
+        [HttpPost]
+
+        public IActionResult AddnewStudent(student stu)
+        {
+            if(ModelState.IsValid)
+            {
+                context.students.Add(stu);
+                context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(stu);
+
+        }
+
+        public IActionResult UpdateDetails(int Id)
+        {
+            var data = context.students.Find(Id);
+            return View(data);
+        }
+        [HttpPost]
+        public IActionResult UpdateDetails(student s)
+        {
+            if(ModelState.IsValid)
+            {
+                student stud = context.students.Find(s.Id);
+                stud.StudentName = s.StudentName;
+                stud.DOB = s.DOB;
+                stud.photo = s.photo;
+                stud.Height = s.Height;
+                stud.Weight = s.Weight;
+
+                context.SaveChanges();
+
+                return RedirectToAction("Index");
+
+            }
+
+            return View();
+        }
+
+        public IActionResult DeleteStudent (int Id)
+        {
+            var data = context.student.Find(Id);
+            return View(data);
+        }
+        [HttpPost]
+        public IActionResult DeleteStudent (student s)
+        {
+            student stude = context.Find(s.Id);
+            context.students.Remove(stude);
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+        
+    }
+}
+
+---------------------------------
+Views
+
+//CREATE.cshtml
+ 
+@model Department
+<h1>Add Record</h1>
+@using(Html.BeginForm())
+{
+   <div class='form-horizontal'>
+ 
+<div class='form-group' >
+    @Html.DisplayNameFor(m=>m.Id)
+     @* @Html.EditorFor(m=>m.Id)
+      @Html.ValidationMessageFor(m=>m.Id) *@
+ 
+</div>
+ 
+<div class='form-group'>
+    @Html.DisplayNameFor(m=>m.DeptName)
+     @Html.EditorFor(m=>m.DeptName)
+      @Html.ValidationMessageFor(m=>m.DeptName)
+ 
+</div>
+ 
+ 
+<div class='form-group'>
+    @Html.DisplayNameFor(m=>m.Location)
+     @Html.EditorFor(m=>m.Location)
+      @Html.ValidationMessageFor(m=>m.Location)
+ 
+</div>
+ 
+ 
+   </div>
+   <br><br>
+   <input type='submit' value='Save'>
+}
+INDEX.cshtml
+ 
+@model IEnumerable<Department>
+ 
+ @Html.ActionLink("Add Record","Create")
+    <table class='table'>
+        <thead>
+            <th>@Html.DisplayNameFor(m=>m.Id)</th>
+             <th>@Html.DisplayNameFor(m=>m.DeptName)</th>
+              <th>@Html.DisplayNameFor(m=>m.Location)</th>
+        </thead>
+ 
+ 
+        <tbody>
+            @foreach(var data in Model)
+            {
+            <tr>
+                <td>@data.Id</td>
+                <td>@data.DeptName</td>
+                <td>@data.Location</td>
+                <td>@Html.ActionLink("Edit","Edit",new{id=@data.Id})</td>&nbsp;&nbsp;
+                <td>@Html.ActionLink("Delete","Delete",new{id=@data.Id})</td>&nbsp;&nbsp;
+            </tr>
+            }
+        </tbody>
+    </table>
+EDIT.cshtml
+ 
+@model Department
+<h1>Add Record</h1>
+@using(Html.BeginForm())
+{
+   <div class='form-horizontal'>
+ 
+<div class='form-group' >
+    @Html.DisplayNameFor(m=>m.Id)
+     @* @Html.EditorFor(m=>m.Id)
+      @Html.ValidationMessageFor(m=>m.Id) *@
+ 
+</div>
+ 
+<div class='form-group'>
+    @Html.DisplayNameFor(m=>m.DeptName)
+     @Html.EditorFor(m=>m.DeptName)
+      @Html.ValidationMessageFor(m=>m.DeptName)
+ 
+</div>
+ 
+ 
+<div class='form-group'>
+    @Html.DisplayNameFor(m=>m.Location)
+     @Html.EditorFor(m=>m.Location)
+      @Html.ValidationMessageFor(m=>m.Location)
+ 
+</div>
+ 
+ 
+   </div>
+   <br><br>
+   <input type='submit' value='Save'>
+}
+DELETE.cshtml
+ 
+@model Department
+<h2> Deleting record of @Model</h2>
+<p>@Html.DisplayNameFor(m=>m.Id) : @Html.DisplayFor(m=>m.Id)</p>
+<p>@Html.DisplayNameFor(m=>m.DeptName) : @Html.DisplayFor(m=>m.DeptName)</p>    
+ <p>@Html.DisplayNameFor(m=>m.Location) : @Html.DisplayFor(m=>m.Location)</p>
+ <hr>
+ @using(Html.BeginForm())
+ {
+    <input type="submit" value="Delete ?" style="background-color: red;">
+ 
+ }
+@Html.ActionLink("Back to List","List")
+
+
+PROGRAM.CS
+ 
+var cs=builder.Configuration.GetConnectionString("mycon");
+builder.Services.AddDbContext<AppDbContext>(options=>options.UseSqlServer(cs));
+STRING
+ 
+User ID=sa;password=examlyMssql@123; server=localhost;Database=*****;trusted_connection=false;Persist Security Info=False;Encrypt=False
+
+
+------------------------------------------------------------------------
+
+Display 
+
+[10:06] Tejas Milind Shroff
+@model IEnumerable<Employee>
+ 
+    <table class= 'table'>
+        <thead>
+            <th>
+                @Html.DisplayNameFor(e=>e.EmpId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(e=>e.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(e=>e.Salary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(e=>e.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(e=>e.Dob)
+            </th>
+ 
+        </thead>
+        <tbody>
+            @foreach (var item in @Model){
+                <tr>
+                    <td>
+                        @item.EmpId
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Salary
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>
+                        @item.Dob
+                    </td>
+                   
+                </tr>
+            }
+           
+        </tbody>
+    </table>
+    <br>
+   
+ 
+Display view
+
+----------------------------------------------------------------------------------------------------
+
+ADD
+
+@model EMS.Models.Department
+ 
+<h2>Adding department</h2>
+ 
+<hr>
+@using (Html.BeginForm()){
+    <div>
+        @Html.DisplayNameFor(d=>d.Id)
+       
+        @Html.EditorFor(d=>d.Id)
+       
+        @Html.ValidationMessageFor(d=>d.Id)
+    </div>
+   
+      <div>
+        @Html.DisplayNameFor(d=>d.DeptName)
+       
+        @Html.EditorFor(d=>d.DeptName)
+       
+        @Html.ValidationMessageFor(d=>d.DeptName)
+    </div>
+ 
+      <div>
+        @Html.DisplayNameFor(d=>d.Location)
+       
+        @Html.EditorFor(d=>d.Location)
+       
+        @Html.ValidationMessageFor(d=>d.Location)
+    </div>
+ 
+    <br>
+ 
+    <input type ="Submit" value ="Save">
+    <br>
+    <br>
+ 
+    @Html.ActionLink("Back to List","List")
+   
+}
+
+---------------------------------------------------------------------------
+
+Exception
+
+using System; 
+class CustomCalculationException : Exception 
+
+{ 
+    public CustomCalculationException(string message) : base(message) 
+
+    { 
+    } 
+} 
+                if (num2 == 0) 
+
+                { 
+
+                    throw new CustomCalculationException("Division by zero is not allowed."); 
+
+                } 
+
+                result = num1 / num2; 
+
+                break; 
+
+            default: 
+
+                throw new CustomCalculationException("Invalid operation requested."); 
+
+        } 
+        return result; 
+
+-----------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Katthak.Models
+{
+    public class Student
+    {
+        public int StudentID {get; set;}
+        public string? Name {get; set;}
+        public string? Email {get; set;}
+        public int ClassID {get; set;}
+        public virtual Class? Class {get; set;}
+    }
+}
+
+//Class
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+
+namespace Katthak.Models
+{
+    public class Class
+    {
+        public int ClassID {get; set;}
+        public TimeSpan StartTime {get; set;}
+        public TimeSpan EndTime {get; set;}   
+        public int Capacity {get; set;}
+        public virtual ICollection<Student>? Students {get; set;} 
+    }
+}
+
+//AppDbContext
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+namespace Katthak.Models
+{
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext(DbContextOptions <ApplicationDbContext> options) : base(options)
+        {
+            
+        }
+
+        public virtual DbSet<Student> Students {get; set;}
+        public virtual DbSet<Class> Classes {get; set;}
+    }
+}
+
+//ClassController
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Katthak.Models;
+
+namespace Katthak.Controllers
+{
+    //[Route("[controller]")]
+    public class ClassController : Controller
+    {
+        private readonly ApplicationDbContext db;
+
+        public ClassController(ApplicationDbContext context)
+        {
+            db = context;
+        }
+
+        public IActionResult AvailableClasses()
+        {
+            int count1 = 0;
+            int count2 = 0;
+            var stud = db.Students;
+            
+            foreach(var i in stud)
+            {
+            if(i.ClassID == 1)
+            {
+                count1++;
+            }
+            else if(i.ClassID == 2)
+            {
+                count2++;
+            }
+            }
+            ViewBag.C1 = count1;
+            ViewBag.C2 = count2;
+            var classList = db.Classes;
+            return View(classList);
+        }
+        public IActionResult BookedClasses()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View("Error!");
+        }
+    }
+}
+
+//BookingController
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Katthak.Models;
+
+namespace Katthak.Controllers
+{
+    //[Route("[controller]")]
+    public class BookingController : Controller
+    {
+        private readonly ApplicationDbContext db;
+
+        public BookingController(ApplicationDbContext context)
+        {
+            db = context;
+        }
+
+        public IActionResult ClassEnrollmentForm(int id)
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ClassEnrollmentForm(int id, string name, string email)
+        {
+            Student s = new Student{
+                Name = name,
+                Email = email,
+                ClassID = id
+            };
+
+            db.Students.Add(s);
+            db.SaveChanges();
+
+            return RedirectToAction("EnrollmentConfirmation", new {id = id});
+        }
+
+        public IActionResult EnrollmentConfirmation(int id)
+        {
+            var stud = db.Classes.Find(id);
+            return View(stud);
+        }
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View("Error!");
+        }
+    }
+}
+
+//Class/AvailableClasses
+@model IEnumerable<Katthak.Models.Class>
+<h4>Available Kathak Dance Classes</h4>
+<hr>
+<table class="table table-striped">
+
+    <tr>
+        <th>Class ID</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Total Capacity</th>
+        <th>Students Count</th>
+        <th>Remaining Count</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach(var i in Model)
+    {
+        <tr>
+            <td>@i.ClassID</td>
+            <td>@i.StartTime</td>
+            <td>@i.EndTime</td>
+            <td>@i.Capacity</td>
+            @if(i.ClassID==1)
+            {
+                <td>@ViewBag.C1</td>
+            }
+            else if(i.ClassID==2)
+            {
+                <td>@ViewBag.C2</td> 
+            }
+            @if(i.ClassID==1)
+            {
+                <td>@(i.Capacity - ViewBag.C1)</td>
+            }
+            else if(i.ClassID==2)
+            {
+                <td>@(i.Capacity - ViewBag.C2)</td> 
+            }
+
+            @if(i.ClassID==1)
+            {
+                if((i.Capacity - ViewBag.C1) == 0)
+                {
+                    <td>
+                        <p>Enrollment Over</p>
+                    </td>
+                }
+                else{
+                <td>
+                    <a asp-controller="Booking" asp-action="ClassEnrollmentForm" asp-route-id=@i.ClassID class="btn btn-primary">Enroll</a>
+                </td>
+                }
+            }
+            else if(i.ClassID==2)
+            {
+                if((i.Capacity - ViewBag.C2) == 0)
+                {
+                    <td>
+                        <p>Enrollment Over</p>
+                    </td>
+                }
+                else{
+                <td>
+                     <a asp-controller="Booking" asp-action="ClassEnrollmentForm" asp-route-id=@i.ClassID class="btn btn-primary">Enroll</a>
+                </td>
+                }
+            }
+            
+        </tr>
+    }
+</table>
+
+
+//Booking/ClassEnrollmentForm
+@model Katthak.Models.Student
+
+<h4>Enroll In Kathak Dance Class</h4>
+
+<hr>
+
+<div class="row">
+    <div class="col-4">
+        <form method="post" asp-controller="Booking" asp-action="ClassEnrollmentForm">
+            
+            <div class="form-group">
+                <label class="control-label">Your Name</label>
+                <input asp-for="Name" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Your Email</label>
+                <input asp-for="Email" class="form-control">
+            </div>
+
+            <br>
+
+            <div class="form-group">
+                 <input type="submit" value="Enroll" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</div>
+
+//Class/EnrollmentConfirmation
+@model Katthak.Models.Class;
+
+<h4>Enrollment Confirmation</h4>
+<p>You have successfully enrolled in Kathak dance class.</p>
+<hr>
+
+<table class="table table-striped">
+
+    <tr>
+        <th>Class ID</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+    </tr>
+
+    
+        <tr>
+            <td>@Model.ClassID</td>
+            <td>@Model.StartTime</td>
+            <td>@Model.EndTime</td>
+        </tr>
+</table>
+
+        <a href="/Class/AvailableClasses" class="btn btn-primary">Back To Available Classes</a>
+        
+
+
+------------------------------------------------------------------------------
+
+using EmpApi.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
+namespace EmpApi.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class DepartmentController : ControllerBase
+    {
+        IDept repo;
+        public DepartmentController(IDept _repo)
+        {
+            this.repo = _repo;
+        }
+        [HttpGet]
+        [Route("ListDept")]
+        public IActionResult GetDept()
+        {
+            var data = repo.GetDepartments();
+            return Ok(data);
+        }
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult PostDept(Department dept)
+        {
+            if(ModelState.IsValid)
+            {
+                repo.AddDept(dept);
+                return Created("Record Added",dept);
+            }
+            return BadRequest();
+        }
+        
+        [Route("ListDept/{id}")]
+        public IActionResult GetDept (int id)
+        {
+            var data = repo.FindDept(id);
+            return Ok(data);
+        }
+        [HttpPut]
+        [Route("EditDept/{id}")]
+        public IActionResult PutDept(int id,Department department)
+        {
+            repo.EditDept(department);
+            return Ok();
+        }
+        [HttpDelete]
+        [Route("DeleteDept/{id}")]
+        public IActionResult DeleteDept(int id)
+        {
+            repo.DeleteDept(id);
+            return Ok();
+        }
+    }
+ 
+}
+    
+
+------------------------------------------------------------------
+
+using System.Collections.Generic;
+
+namespace EmpApi.Models
+{
+    public interface IDept
+    {
+        List<Department> GetDepartments();
+        Department FindDept(int id);
+        void AddDept(Department d);
+        void EditDept (Department d);
+        void DeleteDept(int id);
+    }
+}
+
+-------------------------------------------------------------------
+
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
+namespace EmpApi.Models
+{
+    public class DepartmentRepository: IDept
+    {
+        EmsdatabaseContext context = new EmsdatabaseContext();
+        public void AddDept(Department d)
+        {
+            context.Departments.Add(d);
+            context.SaveChanges();
+        }
+
+        public void DeleteDept(int id)
+        {
+            Department d = context.Departments.Find(id);
+            context.Departments.Remove(d);
+            context.SaveChanges();
+
+        }
+
+        public void EditDept(Department d)
+        {
+            Department dept = context.Departments.Find(d.Id);
+            dept.DeptName = d.DeptName;
+            dept.Location = d.Location;
+            context.SaveChanges();
+        }
+
+        public Department FindDept(int id)
+        {
+            var data = context.Departments.Find(id);
+            return data;
+        }
+
+        public List<Department> GetDepartments()
+        {
+            return context.Departments.ToList();
+        }
+    }
+}
+
+
+    public IActionResult List()
+{
+    // var data = context.Employees.ToList();
+    var data = context.Employees.Include("Dept").ToList();
+    return View(data);
+}

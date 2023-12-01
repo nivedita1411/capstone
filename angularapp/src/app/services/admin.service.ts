@@ -51,4 +51,9 @@ export class AdminService {
   {
     return this.httpclient.get<any[]>(this.apiUrl + '/admin/event/' + eventtype)
   }
+
+  getEventById(id:number) : Observable<any>
+  {
+    return this.httpclient.get<any>(this.apiUrl + '/event' + id)
+  }
 }
