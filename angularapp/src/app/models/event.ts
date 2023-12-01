@@ -1,5 +1,5 @@
 export interface Event {
-    id:number
+    eventId:number
     eventType: string
     eventDescription:string
     participantsCount:number

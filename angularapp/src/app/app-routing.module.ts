@@ -8,7 +8,7 @@ import { EditeventComponent } from './Admin/editevent/editevent.component';
 const routes: Routes = [
   {path:'Admin/event',component:ListeventsComponent},
   {path:'Admin/event',component:AddeventComponent},
-  {path:'Admin/admin/updateevent/:id',component:EditeventComponent}
+  {path:'Admin/updateevent/:id',component:EditeventComponent}
 ];
 
 @NgModule({
