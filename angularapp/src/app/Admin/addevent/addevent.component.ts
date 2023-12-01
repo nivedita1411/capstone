@@ -26,7 +26,8 @@ export class AddeventComponent implements OnInit {
     console.log(this.eventdata)
     this.as.AddEvent(this.eventdata).subscribe(
       ()=>{
-        this.rout
+        this.router.navigate(['/event'])
+        alert("Event Added")
       }
     )
   }
