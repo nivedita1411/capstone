@@ -54,6 +54,6 @@ export class AdminService {
 
   getEventById(id:number) : Observable<any>
   {
-    return this.httpclient.get<any>(this.apiUrl + '/event' + id)
+    return this.httpclient.get<any>(this.apiUrl + '/event/' + id)
   }
 }
