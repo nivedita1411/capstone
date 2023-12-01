@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -9,10 +10,23 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class EditeventComponent implements OnInit {
 
-  constructor(private as:AdminService, private route : Router) { }
+  editeventdata : any
+  id:number
+  constructor(private as:AdminService, private route : Router, private fb : FormBuilder, private ar: ActivatedRoute) { 
+  }
+
+  editeventdataForm = this.fb.group({
+    eventType: [''],
+    eventDescription: [''],
+    participantsCount: [''],
+    eventCharges: ['']
+  })
+
+  onSubmit(){
+
+  }
 
   ngOnInit() {
-    
   }
 
 }
