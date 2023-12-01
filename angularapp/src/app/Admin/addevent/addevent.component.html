@@ -1,31 +1,34 @@
-<!-- <p>addevent works!</p> -->
 
-<h1>Add Event</h1>
 <hr>
-<form #eventdataForm='ngForm' (ngSubmit)="onSubmit()">
+<form [formGroup]="eventdataForm" (ngSubmit)="onSubmit()">
 
-    <label for="eventType">Event Type</label>
-    <select id = "eventType">
-        <option value="conference">Conference</option>
-        <option value="inductionProgram">Induction Program</option>
-        <option value="productLaunch">Product Launch</option>
-        <option value="tradeShow">Trade Show</option>
-        <option value="appreciationCeremony">Appreciation Ceremony</option>
-        <option value="teamBuildingActivity">Team-building Activity</option>
-    </select>
+    <div>
+        <label for="eventType">Event Type</label>
+        <select id = "eventType">
+            <option value="conference">Conference</option>
+            <option value="inductionProgram">Induction Program</option>
+            <option value="productLaunch">Product Launch</option>
+            <option value="tradeShow">Trade Show</option>
+            <option value="appreciationCeremony">Appreciation Ceremony</option>
+            <option value="teamBuildingActivity">Team-building Activity</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="eventDescription">Event Description</label>
+        <textarea id="eventDescription" name="eventDescription" type="text"></textarea>
+    </div>
+
+    <div>
+        <label for="participantsCount">participantsCount</label>
+        <input id="participantsCount" name="participantsCount" type="text" >
+    </div>
+
+    <div>
+        <label for="eventCharges">Event Charges</label>
+        <input id="eventCharges" name="eventCharges" type="text">
+    </div>
     
-    <label for="eventDescription">Event Description</label>
-    <textarea id="eventDescription" name="eventDescription" type="text" ngModel required #eventDescription="ngModel">Type here</textarea>
-        
-    
-    
-    <label for="participantsCount">participantsCount</label>
-    <input id="participantsCount" name="participantsCount" type="text" ngModel required #participantsCount="ngModel">
-    
-    
-    <label for="eventCharges">Event Charges/label>
-        <input id="eventCharges" name="eventCharges" type="text" ngModel>
-    
-    <input type="submit" value="Save">
+    <button type="submit">Submit</button>
 </form>
     

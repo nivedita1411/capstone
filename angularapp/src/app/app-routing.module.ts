@@ -6,7 +6,7 @@ import { AddeventComponent } from './Admin/addevent/addevent.component';
 
 const routes: Routes = [
   {path:'Admin/event',component:ListeventsComponent},
-  {path:'Admin/event',component:AddeventComponent}
+  {path:'Admin/addevent',component:AddeventComponent}
 ];
 
 @NgModule({

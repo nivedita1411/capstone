@@ -14,7 +14,7 @@ export class AdminService {
 
   getAllEvents() : Observable<any[]>
   {
-    return this.httpclient.get<any[]>(this.apiUrl + '/event')
+    return this.httpclient.get<any[]>(this.apiUrl + '/addevent')
   }
 
   getAllBookings() : Observable<any[]>
