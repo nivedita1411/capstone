@@ -12,6 +12,7 @@ export class EditeventComponent implements OnInit {
   constructor(private as:AdminService, private route : Router) { }
 
   ngOnInit() {
+    
   }
 
 }

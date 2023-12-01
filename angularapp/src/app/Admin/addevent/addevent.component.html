@@ -4,7 +4,7 @@
 
     <div>
         <label for="eventType">Event Type</label>
-        <select id = "eventType">
+        <select id = "eventType" formControlName="eventType">
             <option value="conference">Conference</option>
             <option value="inductionProgram">Induction Program</option>
             <option value="productLaunch">Product Launch</option>
@@ -16,17 +16,17 @@
 
     <div>
         <label for="eventDescription">Event Description</label>
-        <textarea id="eventDescription" name="eventDescription" type="text"></textarea>
+        <textarea id="eventDescription" name="eventDescription" type="text" formControlName="eventDescription"></textarea>
     </div>
 
     <div>
         <label for="participantsCount">Participant Count</label>
-        <input id="participantsCount" name="participantsCount" >
+        <input id="participantsCount" name="participantsCount" formControlName="participantsCount">
     </div>
 
     <div>
         <label for="eventCharges">Event Charges</label>
-        <input id="eventCharges" name="eventCharges" type="text">
+        <input id="eventCharges" name="eventCharges" type="text" formControlName="eventCharges">
     </div>
     
     <button type="submit">Submit</button>
