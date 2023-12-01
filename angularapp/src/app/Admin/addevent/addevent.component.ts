@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -8,7 +10,26 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class AddeventComponent implements OnInit {
 
-  constructor(private as:AdminService ) { }
+  constructor(private as:AdminService, private fb : FormBuilder, private router: Router) { }
+
+  eventdata: any
+
+  eventdataForm = this.fb.group({
+    eventType: ['', Validators.required],
+    eventDescription: [''],
+    participantsCount: ['', Validators.required],
+    eventCharges: ['',Validators.required]
+  })
+
+  onSubmit(){
+    this.eventdata = this.eventdataForm.value
+    console.log(this.eventdata)
+    this.as.AddEvent(this.eventdata).subscribe(
+      ()=>{
+        this.rout
+      }
+    )
+  }
 
   ngOnInit() {
   }

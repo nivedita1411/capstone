@@ -13,10 +13,10 @@
             </thead>
             <tbody>
                 <tr *ngFor = "let m of eventdata">
-                    <td> {{m.id}} </td>
+                    <td> {{m.eventId}} </td>
                     <td> {{m.eventType}} </td>
                     <td> {{m.eventDescription}} </td>
-                    <td> {{m.participantCount}} </td>
+                    <td> {{m.participantsCount}} </td>
                     <td> {{m.eventCharges}} </td>
                     
                     <a [routerLink] = "['/admin/updateevent/',m.id]">Edit</a>&nbsp;&nbsp;
