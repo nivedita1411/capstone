@@ -1,1 +1,28 @@
-<p>listevents works!</p>
+<!-- <p>listevents works!</p> -->
+
+<div class = "container">
+    <div class = "jumbotron">
+        <h1>Event Listing</h1>
+        <table class = "table">
+            <thead>
+                <th>Id</th>
+                <th>Event Type</th>
+                <th>Event Description</th>
+                <th>Participant Count</th>
+                <th>Event Charges</th>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let m of eventdata">
+                    <td> {{m.id}} </td>
+                    <td> {{m.eventType}} </td>
+                    <td> {{m.eventDescription}} </td>
+                    <td> {{m.participantCount}} </td>
+                    <td> {{m.eventCharges}} </td>
+                    
+                    <a [routerLink] = "['/EditPlayer/',m.id]">Edit</a>&nbsp;&nbsp;
+                    <a [routerLink] = "['/DeletePlayer/',m.id]">Delete</a>&nbsp;&nbsp;
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

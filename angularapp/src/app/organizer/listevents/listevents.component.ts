@@ -8,12 +8,12 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class ListeventsComponent implements OnInit {
 
-  constructor( private as : AdminService) { }
-
   eventdata: Event[] = []
 
-  this.as.getAllEvents().subsc
-
+  constructor( private as : AdminService) {
+    this.as.getAllEvents().subscribe(data => {this.eventdata.push()})
+   }
+  
   ngOnInit() {
   }
 
