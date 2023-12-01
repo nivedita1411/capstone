@@ -27,5 +27,23 @@ export class AdminService {
   }
 
   httpOptions = {headers: new HttpHeaders({'Content-type':'application/json'})}
-  AddEvent()
+  AddEvent(eventdata : Event) : Observable<any>
+  {
+    return this.httpclient.post<any>(this.apiUrl + '/event',eventdata, this.httpOptions)
+  }
+
+  EditEvent(eventdata : Event) : Observable<any>
+  {
+    return this.httpclient.put(this.apiUrl + '/admin/updateevent' + eventdata.id, eventdata,this.httpOptions)
+  }
+
+  DeleteEvent(id : number) : Observable<any>
+  {
+    return this.httpclient.delete<any>(this.apiUrl + '/deleteevent' + id )
+  }
+
+  updateStatus(id:number)
+  {
+    return this.httpclient.put<any>
+  }
 }

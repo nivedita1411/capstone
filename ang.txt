@@ -1,0 +1,827 @@
+angular.json - > npm install bootstrap@4
+npx ng generate guard guard/auth
+npx ng g service services/auth --skipTests=true
+npx ng g module players --routing
+npx ng g service players/services/movie
+npx ng g c players/list
+------------------------------------------------------
+part of services
+----------------
+
+.pipe(catchError(this.handleError));
+
+handleError(error:HttpErrorResponse)
+  {
+    var errmsg = error.status + '\n' + error.statusText + '\n' + error.error
+    alert(errmsg)
+    return throwError(errmsg)
+  }
+
+app-routing format: 
+
+<header>
+<a routerLink = "/players">Players</a>
+
+-- in routes
+
+{path:'players',redirectTo:'players/list',pathMatch:'full'},
+{path:'players/list',component:listplayersComponent},
+
+{path:'GetPlayer', component:GetplayersComponent},
+  {path:'AddPlayer',component:AddplayerComponent},
+
+{path:'player/list',component:},
+--------------------------------------------------
+import ( NgModule } from
+*Pangular/core:
+import (RouterModule, Routes ) from @angular/router!;
+3
+import ( Listcomponent } from
+"-/players/list/list.component";
+const
+routes: Routes = [];
+RouterModule. forRoot ([
+( path: 'players', component: ListComponent }
+-------------
+App routing
+----------------------------------------------
+--app.module.ts
+
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+
+--------------------------------------
+button:
+<input type="button" value="Show Movies" class="btn btn-success" (click)="Show()">
+Show()
+{
+    this.router.navigate(['/listmovies'])
+}
+--------------------------------------------------
+/////////////////////////////////////////////////
+---------------------------------------------------
+
+services
+
+import { Injectable } from '@angular/core';
+import { IMovie } from '../model/imovie';
+import {HttpClient , HttpErrorResponse, HttpHeaders} from "@angular/common/http";
+import { Observable, throwError } from 'rxjs';
+import { Idetails } from '../model/idetail';
+import { HttpHandler } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AdminService {
+
+
+  private url = "https://8080-bacdcffacbbecabcdadeafbbdcaeafe.premiumproject.examly.io/Admin";
+  constructor(private httpclient:HttpClient) { }
+
+  
+  GetPlayers() : Observable<Player[]>
+  {
+    return this.httpclient.get<Player[]>(this.url + '/GetPlayer')
+  }
+  
+  getPlayer(id:number):Observable<Player>
+  {
+    return this.httpclient.get<Player>(this.url + '/GetPlayer/' + id)
+  }
+
+  httpOptions = {headers:new HttpHeaders({'Content-type':'application/json'})}
+  AddPlayer(playerdata:Player):Observable<Player>
+  {
+    return this.httpclient.post<Player>(this.url+ '/AddPlayer',playerdata,this.httpOptions)
+  }
+
+  editPlayer(playerdata:Player):Observable<Player>
+  {
+    return this.httpclient.put<Player>(this.url + '/EditPlayer/'+ playerdata.id,playerdata,this.httpOptions)
+  }
+  deletePlayer(id:number):Observable<Player>
+  {
+    return this.httpclient.delete<Player>(this.url + '/DeletePlayer/' + id)
+  }
+
+  // addDetails(detailsdata: Idetails) :Observable<Idetails>{
+  //   return this.httpclient.post<Idetails>(this.url2 + '/AddMovieDetails',detailsdata, this.httpOptions).pipe(catchError(this.handleError));
+  // }
+
+  // handleError(error:HttpErrorResponse)
+  // {
+  //   var errmsg = error.status + '\n' + error.statusText + '\n' + error.error
+  //   alert(errmsg)
+  //   return throwError(errmsg)
+  // }
+}
+
+
+-------------------------------------------------------------------------------
+
+get all players
+
+Typescript
+
+import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../services/admin.service';
+import { Player } from '../models/player';
+
+@Component({
+  selector: 'app-getplayers',
+  templateUrl: './getplayers.component.html',
+  styleUrls: ['./getplayers.component.css']
+})
+export class GetplayersComponent implements OnInit {
+
+  playerdata: Player[] = []
+
+  constructor(private as:AdminService) { 
+    this.as.GetPlayers().subscribe(data =>{this.playerdata.push(...data)})
+    console.log(this.playerdata)
+  }
+
+  ngOnInit(): void {
+  }
+
+}
+-----
+Html
+
+<div class = "container">
+    <div class = "jumbotron">
+        <h1>Player Listing</h1>
+        <table class = "table">
+            <thead>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Category</th>
+                <th>Bidding Price</th>
+                <th>Team ID</th>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let m of playerdata">
+                    <td> {{m.id}} </td>
+                    <td> {{m.name}} </td>
+                    <td> {{m.age}} </td>
+                    <td> {{m.category}} </td>
+                    <td> {{m.biddingPrice}} </td>
+                    <td> {{m.teamId}} </td>
+                    
+                    <a [routerLink] = "['/GetPlayer/',m.id]">Details</a>&nbsp;&nbsp;
+                    <a [routerLink] = "['/EditPlayer/',m.id]">Edit</a>&nbsp;&nbsp;
+                    <a [routerLink] = "['/DeletePlayer/',m.id]">Delete</a>&nbsp;&nbsp;
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+------------------------------------------------------------------------------
+get player - id
+
+Typescript
+
+import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../services/admin.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Player } from '../models/player';
+
+@Component({
+  selector: 'app-findplayer',
+  templateUrl: './findplayer.component.html',
+  styleUrls: ['./findplayer.component.css']
+})
+export class FindplayerComponent implements OnInit {
+
+  constructor(private as:AdminService, private ar:ActivatedRoute, private router:Router) { }
+
+  playerdata:Player
+  id:number
+
+  ngOnInit(): void {
+
+    const tid = this.ar.snapshot.paramMap.get('id')
+    this.id = Number(tid)
+    this.as.getPlayer(this.id).subscribe((data:Player) => {
+      this.playerdata = data;
+    })
+  }
+
+  Show()
+  {
+    this.router.navigate(['/GetPlayer'])
+  }
+
+}
+
+-----------------
+
+Html
+
+<!-- <p>findplayer works!</p> -->
+
+<!-- <p>findmovie works!</p> -->
+
+<h3>Details of Player {{playerdata.name}} </h3>
+<div>
+    Id: {{playerdata.id}}<br>
+    Name: {{playerdata.name}}<br>
+    Category: {{playerdata.category}}<br>
+    Bidding Price: {{playerdata.biddingPrice}}<br>
+</div>
+<br>
+<br>
+<a [routerLink] = "['/GetPlayer']">Back To List</a>
+<br>
+<br>
+<!-- <input type="button" value="Show Players" class="btn btn-success" (click)="Show()"> -->
+
+
+
+
+---------------------------------------------------------------------------------
+Add player
+
+Typescript
+
+import { Component, OnInit } from '@angular/core';
+import { Player } from '../models/player';
+import { AdminService } from '../services/admin.service';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-addplayer',
+  templateUrl: './addplayer.component.html',
+  styleUrls: ['./addplayer.component.css']
+})
+export class AddplayerComponent implements OnInit {
+
+  playerdata: Player = {id:0,name:'',age:0,category:'',biddingPrice:0,teamId:0}
+
+  constructor(private as: AdminService, private route: Router) { }
+
+  saveData(player:Player):void
+  {
+    this.playerdata = player
+    this.as.AddPlayer(this.playerdata).subscribe(
+      ()=>{
+        alert('Record Added Successfully')
+        this.route.navigate(['/GetPlayer'])
+        
+      }
+    )
+  }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+--------------
+Html
+
+<!-- <p>addplayer works!</p> -->
+<!-- <p>add-movie works!</p> -->
+
+<h2>Adding Players</h2>
+<hr>
+<form (ngSubmit)="saveData(playerdata)" #playerform="ngForm">
+    <div>
+        <label for="name">Player Name</label>
+        <input type="text" id="name" name="name" placeholder="enter player name"
+        [(ngModel)]="playerdata.name" required #name="ngModel">
+    </div>
+    <div>
+        <label for="age">Age</label>
+        <input type="text" id="age" name="age" placeholder="enter age"
+        [(ngModel)]="playerdata.age" required #age="ngModel">
+    </div>
+    <div>
+        <label for="category">Category</label>
+        <input type="text" id="category" name="year" placeholder="enter category"
+        [(ngModel)]="playerdata.category" required #category="ngModel">
+    </div>
+    <div>
+        <label for="biddingPrice">Bidding Price</label>
+        <input type="text" id="biddingPrice" name="year" placeholder="enter bidding price"
+        [(ngModel)]="playerdata.biddingPrice" required #biddingPrice="ngModel">
+    </div>
+    <div>
+        <label for="teamId"> Team ID</label>
+        <input type="text" id="teamId" name="teamId" placeholder="enter Team ID"
+        [(ngModel)]="playerdata.teamId" required #teamId="ngModel">
+    </div>
+    <br>
+    <p>
+        <input type="submit" value="Save" class="btn btn-Info" [disabled]="!playerform.valid">
+    </p>
+</form>
+
+
+
+-----------------------------------------------------------------------------------
+edit player
+
+Typescript
+
+import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../services/admin.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Player } from '../models/player';
+
+@Component({
+  selector: 'app-editplayer',
+  templateUrl: './editplayer.component.html',
+  styleUrls: ['./editplayer.component.css']
+})
+export class EditplayerComponent implements OnInit {
+
+  constructor(private as:AdminService, private route: Router, private ar: ActivatedRoute) { }
+
+  playerdata: Player = {id:0,name:'',age:0,category:'',biddingPrice:0, teamId:0}
+  id:number
+
+  ngOnInit(){
+    const tid = this.ar.snapshot.paramMap.get('id')
+    this.id = Number(tid)
+    this.getPlayer(this.id)
+  }
+
+  getPlayer(id:number){
+    this.as.getPlayer(id).subscribe((data:Player) => this.playerdata = data)
+  }
+
+  saveData(player:Player)
+  {
+    this.playerdata = player
+    this.as.editPlayer(this.playerdata).subscribe(() => {
+      alert("Record Edited")
+      this.route.navigate(['/GetPlayer'])
+    })
+  }
+
+}
+
+
+
+Html
+
+<!-- <p>editplayer works!</p> -->
+
+<h2>Editing Players</h2>
+<hr>
+<form (ngSubmit)="saveData(playerdata)" #playerform="ngForm">
+    <div>
+        <label for="id">ID</label>
+        <input type="text" id="id" name="id" readonly [(ngModel)]="playerdata.id">
+    </div>
+    <div>
+        <label for="name">Player Name</label>
+        <input type="text" id="name" name="name" placeholder="enter player name"
+        [(ngModel)]="playerdata.name" required #name="ngModel">
+    </div>
+    <div>
+        <label for="age">Age</label>
+        <input type="text" id="age" name="age" placeholder="enter age"
+        [(ngModel)]="playerdata.age" required #age="ngModel">
+    </div>
+    <div>
+        <label for="category">Category</label>
+        <input type="text" id="category" name="category" placeholder="enter category"
+        [(ngModel)]="playerdata.category" required #category="ngModel">
+    </div>
+    <div>
+        <label for="biddingPrice">Bidding Price</label>
+        <input type="text" id="biddingPrice" name="biddingPrice" placeholder="enter bidding price"
+        [(ngModel)]="playerdata.biddingPrice" required #biddingPrice="ngModel">
+    </div>
+    <div>
+        <label for="teamId"> Team ID</label>
+        <input type="text" id="teamId" name="teamId" placeholder="enter Team ID"
+        [(ngModel)]="playerdata.teamId" required #teamId="ngModel">
+    </div>
+    <br>
+    <p>
+        <input type="submit" value="Save" class="btn btn-Info" [disabled]="!playerform.valid">
+    </p>
+</form>
+
+
+
+
+----------------------------------------------------------------------------------------
+delete players
+
+Typescript
+
+import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../services/admin.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Player } from '../models/player';
+
+@Component({
+  selector: 'app-deleteplayer',
+  templateUrl: './deleteplayer.component.html',
+  styleUrls: ['./deleteplayer.component.css']
+})
+export class DeleteplayerComponent implements OnInit {
+
+  constructor(private as:AdminService, private ar: ActivatedRoute, private route: Router) { }
+
+  id : number
+  playerdata : Player = {id:0,name:'',age:0,category:'',biddingPrice:0, teamId:0}
+
+  ngOnInit(): void {
+    const tid = this.ar.snapshot.paramMap.get('id')
+    this.id = Number(tid)
+    this.getPlayer(this.id)
+  }
+
+  getPlayer(id : number) {
+    this.as.getPlayer(id).subscribe((data : Player) =>
+      this.playerdata = data
+    )
+  }
+ 
+  saveData(player : Player) : void {
+    this.playerdata = player
+    this.as.deletePlayer(this.id).subscribe(() => {
+      alert("Record Deleted")
+      this.route.navigate(['/GetPlayer'])
+    })
+  }
+
+}
+
+
+
+
+Html
+
+<!-- <p>deleteplayer works!</p> -->
+
+<h2>Delete Player</h2>
+<hr>
+<form (ngSubmit)="saveData(playerdata)" #playerform="ngForm">
+    <div>
+        <label for="id">ID</label>
+        <input type="text" id="id" name="id" readonly [(ngModel)]="playerdata.id">
+    </div>
+    <div>
+        <label for="name">Player Name</label>
+        <input type="text" id="name" name="name" readonly [(ngModel)]="playerdata.name">
+    </div>
+    <div>
+        <label for="age">Age</label>
+        <input type="text" id="age" name="age" placeholder="enter age"
+        [(ngModel)]="playerdata.age" required #age="ngModel">
+    </div>
+    <div>
+        <label for="category">Category</label>
+        <input type="text" id="category" name="category" readonly [(ngModel)]="playerdata.category" >
+    </div>
+    <div>
+        <label for="biddingPrice">Bidding Price</label>
+        <input type="text" id="biddingPrice" name="biddingPrice" readonly [(ngModel)]="playerdata.biddingPrice" >
+    </div>
+    <div>
+        <label for="teamId"> Team ID</label>
+        <input type="text" id="teamId" name="teamId"  readonly [(ngModel)]="playerdata.teamId" >
+    </div>
+    <br>
+    <p>
+        <input type="submit" value="Delete" class="btn btn-Info">
+    </p>
+</form>
+
+---------------------------------------------------------------------------------------------
+
+reactive form
+
+ts:
+---
+
+import { Component, OnInit } from '@angular/core';
+import { IMovie } from '../model/imovie';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MovieserviceService } from '../services/movieservice.service';
+ 
+@Component({
+  selector: 'app-reactform',
+  templateUrl: './reactform.component.html',
+  styleUrls: ['./reactform.component.css']
+})
+export class ReactformComponent implements OnInit {
+  moviedata : IMovie
+  constructor (private fb : FormBuilder ,private ms : MovieserviceService , private route : Router ){ }
+  movieform = this.fb.group({
+    name : ['', Validators.required],
+    yearRelease : ['', [Validators.min(2000) , Validators.max(2023)]],
+   
+    rating : ['', [Validators.required , Validators.min(2000) , Validators.max(2023)]]
+ 
+  })
+ 
+  onsubmit-----savedata(movieform:FormGroup) : void {
+    this.moviedata = this.movieform.value
+    if(this.moviedata.rating > 5){
+      alert('Error in ratings')
+      return
+    }
+    console.log(this.moviedata)
+    this.ms.addMovie(this.moviedata).subscribe(
+      () => {
+        alert('Record added Successfully');
+        this.route.navigate(['/listmovies'])
+      })
+    }
+ 
+ 
+   
+      ngOnInit() {
+      }
+  }
+ 
+-------movieform - fromData
+  // constructor() { }
+html:
+-----
+
+<p>react-form works!</p>
+<h2>Adding Movie Data</h2>
+<hr>
+<form [formGroup]="movieform" (ngSubmit)='savedata(movieform)'>
+    <div class="container jumbotron" style="width: 500px;">
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type= "text" id="name" name="name" formControlName="name" class="form-control">
+            </div>
+ 
+            <div class="form-group">                                                                                                        
+                <label for="year">Year</label>
+                <input type= "text" id="yearReleased name="yearReleased formControlName="yearReleased" class="form-control">
+            </div>
+ 
+            <div class="form-group">
+                <label for="rating">Rating</label>
+                <input type= "text" id="rating" name="rating" formControlName="rating" class="form-control">
+            </div>
+                <br>
+                <br>
+                <p>
+                    <button type ="submit" class="btn btn-info">Save</button>
+                </p>
+    </div>
+ 
+</form>
+
+------------------------------------------------
+
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" routerLink="/GetTeam">List Teams</a>
+          <a class="nav-link" routerLink="/AddPlayer">Add Player</a>
+          <a class="nav-link" routerLink="/AddTeam">Add Team</a>
+          <a class="nav-link" routerLink="/GetPlayer">List Player</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+import { Component, OnInit } from '@angular/core';
+import { JobService } from '../services/job.service';
+import { FormBuilder, Validators } from '@angular/forms';
+ 
+@Component({
+  selector: 'app-job-posting-form',
+  templateUrl: './job-posting-form.component.html',
+  styleUrls: ['./job-posting-form.component.css']
+})
+export class JobPostingFormComponent implements OnInit {
+ 
+  constructor(private ms : JobService, private fb : FormBuilder) { }
+ 
+  jobPosting : any
+ 
+  jobPostingForm = this.fb.group({
+    title : ['', Validators.required],
+    department : ['', Validators.required],
+    location : ['', Validators.required],
+    responsibilities : ['', Validators.required],
+    qualifications : ['', Validators.required],
+    applicationDeadline : ['', Validators.required]
+  })
+ 
+  submitJobPosting() {
+    this.jobPosting = this.jobPostingForm.value
+    this.ms.createJobPosition(this.jobPosting).subscribe(() => {
+      alert("Submitted")
+    })
+  }
+ 
+  ngOnInit(): void {
+  }
+ 
+}
+
+<!-- <p>job-posting-form works!</p> -->
+<h2>Create Job Posting</h2>
+
+<div class="jumbotron container">
+    <form [formGroup]="jobPostingForm" (ngSubmit)="submitJobPosting()">
+        <label for="title">Job Title</label>
+        <input id="title" >
+
+        <label for="department">Department</label>
+        <input id="department" >
+
+        <label for="location">Location</label>
+        <input id="location" >
+
+        <label for="responsibilities">Responsibilities</label>
+        <textarea id="responsibilities"></textarea>
+
+        <label for="qualifications">Qualifications</label>
+        <textarea id="qualifications"></textarea>
+
+        <label for="applicationDeadline">Application Deadline</label>
+        <input id="applicationDeadline" >
+
+        <button type="submit">Submit</button>
+
+    </form>
+</div>
+
+
+import { Component, OnInit } from '@angular/core';
+import { JobService } from '../services/job.service';
+import { FormBuilder, Validators } from '@angular/forms';
+
+
+@Component({
+  selector: 'app-job-posting-form',
+  templateUrl: './job-posting-form.component.html',
+  styleUrls: ['./job-posting-form.component.css']
+})
+export class JobPostingFormComponent implements OnInit {
+
+  
+
+  constructor(private jb : JobService, private fb : FormBuilder) { }
+
+  jobPosting: any
+
+  jobPostingForm = this.fb.group({
+    title : ['',Validators.required],
+    department: ['',Validators.required],
+    location : ['',Validators.required],
+    responsibilities : ['',Validators.required],
+    qualifications:['',Validators.required],
+    applicationDeadline:['',Validators.required]
+  })
+
+  submitJobPosting(){
+    this.jobPosting = this.jobPostingForm.value
+    console.log(this.jobPosting)
+    this.jb.createJobPosition(this.jobPosting).subscribe(
+      ()=> {
+        // this.router.navigate(['/'])
+        alert("Submitted")
+      }
+    )
+  }
+
+
+  ngOnInit(): void {
+  }
+
+}
+-------------dropdown
+ ngOnInit(): void {
+
+    this.ss.getJobPostings().subscribe((data:JobPosition[])=>{
+      console.log(data)
+      this.jobPositions.push(...data)
+      // console.log(this.positions)
+      console.log(this.jobPositions)
+      
+
+    })
+
+  }
+
+
+<label>Select Job Position</label>
+    <select  id="jobPositionId" for="jobPositionId" formControlName="jobPositionId" required>
+    <option *ngFor="let p of jobPositions" [value]="p.id">{{p.title}}</option>
+</select>
+
+----------------------------------------------
+
+
+<h1>Register Forms</h1>
+<hr>
+<form #stdform='ngForm' (ngSubmit)="RegisterStudent(stdform)">
+    <div>
+        <label for="firstname">First Name</label>
+        <input id="firstname" name="firstname" type="text" ngModel required #firstname="ngModel">
+        <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" style="color: red;">
+            <div *ngIf="firstname.errors.required">
+                First Name cannot be blank
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="lastname">Last Name</label>
+        <input id="lastnname" name="lastname" type="text" ngModel required maxlength="25" minlength="3"
+            #lastname="ngModel">
+        <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" style="color: red;">
+            <div *ngIf="lastname.errors.required">
+                Last Name cannot be blank
+            </div>
+            <div *ngIf="lastname.errors.maxlength">
+                Name not more than 30 chars
+            </div>
+            <div *ngIf="lastname.errors.minlength">
+                Name should be 5 chars
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="text" ngModel>
+    </div>
+    <div>
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="male" checked [(ngModel)]="gender">Male
+        <input type="radio" name="gender" value="female" [(ngModel)]="gender">Female
+    </div>
+    <div>
+        <label>Marrital Status:</label>
+        <!-- <input type="checkbox" name="ismarried" id="ismarried" [(ngModel)]="ismarried">Marrital Status -->
+        <input type="radio" name="ismarried" value="Married" [(ngModel)]="gender">Married
+        <input type="radio" name="ismarried" value="Unmarried" [(ngModel)]="gender">Unmarried
+    </div>
+    <div>
+        <label for="city">City</label>
+        <select id="city" name="city" [(ngModel)]="CityId">
+            <option value="1">Mumbai</option>
+            <option value="2">Pune</option>
+            <option value="3">Delhi</option>
+            <option value="4">Chennai</option>
+        </select>=
+
+    </div>
+    <div>
+        <input type="submit" value="Save">
+    </div>
+</form>
+
+<table>
+    <b>Total={{GetTotal()}}</b>
+    <h2>Date Processing</h2>
+    <p>Date without Pipe :{{todaydate}}</p>
+    <p>Date without Pipe :{{todaydate| date}}</p>
+    <p>Date Full :{{todaydate| date:'Fulldate'}}</p>
+    <p>Date Medium :{{todaydate| date:'medium'}}</p>
+    <p>Date Short :{{todaydate| date:'short'}}</p>
+    <p>Time :{{todaydate| date:'hh:mm:ss'}}</p>
+<td>{{emp.salary*0.2}}</td>
+ 
+ 
+    <h1>{{msg}}</h1>
+</table>
+
+<tbody>
+        <tr *ngFor="let d of emplist">
+            <td>{{d.id }}</td>
+            <td>{{d.name | uppercase}}</td>
+            <td>{{d.salary | currency:'INR'}}</td>
+            <td>{{d.city | lowercase}}</td>
+        </tr>
+    </tbody>
+
+
+onSubmit() {
+    // if(this.scheduleForm.valid) {
+    // }
