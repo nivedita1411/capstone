@@ -8,7 +8,7 @@ import { Event } from '../models/event';
 })
 export class AdminService {
 
-  private apiUrl : ""
+  private apiUrl = "https://8080-bacdcffabcaaaceeafebeccaddbefddaf.premiumproject.examly.io/api"
 
   constructor(private httpclient : HttpClient) { }
 

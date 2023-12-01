@@ -3,16 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListeventsComponent } from './organizer/listevents/listevents.component';
+import { ListeventsComponent } from './Admin/listevents/listevents.component';
+import { HttpClientModule } from '@angular/common/http';
+import { EditeventComponent } from './Admin/editevent/editevent.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListeventsComponent
+    ListeventsComponent,
+    EditeventComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
