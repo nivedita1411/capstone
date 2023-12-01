@@ -15,10 +15,10 @@ export class AddeventComponent implements OnInit {
   eventdata: any
 
   eventdataForm = this.fb.group({
-    eventType: ['', Validators.required],
+    eventType: [''],
     eventDescription: [''],
-    participantsCount: ['', Validators.required],
-    eventCharges: ['',Validators.required]
+    participantsCount: [''],
+    eventCharges: ['']
   })
 
   onSubmit(){
