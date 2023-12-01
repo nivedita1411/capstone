@@ -7,7 +7,7 @@ import { ListeventsComponent } from './Admin/listevents/listevents.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EditeventComponent } from './Admin/editevent/editevent.component';
 import { AddeventComponent } from './Admin/addevent/addevent.component';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import {ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,6 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormBuilder,
     ReactiveFormsModule
   ],
   providers: [],
