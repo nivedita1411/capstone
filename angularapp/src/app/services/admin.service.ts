@@ -42,8 +42,12 @@ export class AdminService {
     return this.httpclient.delete<any>(this.apiUrl + '/deleteevent' + id )
   }
 
-  updateStatus(id:number)
+  updateStatus(id1:number, id2:number, eventdata: Event) : Observable<any>
   {
-    return this.httpclient.put<any>
+    return this.httpclient.put<any>(this.apiUrl + '/admin/booking/changestatus/' + id1 + '/' + id2,eventdata, this.httpOptions )
+  }
+  getEventByType(eventtype : string) : Observable <any[]>
+  {
+    return this.httpclient.get<any[]>(this.apiUrl + '/admin/event/' + eventtype)
   }
 }

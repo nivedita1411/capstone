@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using dotnetapp.Models;
+using piroozectt.Models;
  
 namespace dotnetapp.Controllers
 {
@@ -164,12 +164,12 @@ namespace dotnetapp.Controllers
         }
  
         [HttpPut]
-        [Route("admin/booking/changestatus/{bookingId}")]
-        public IActionResult UpdateStatus(int bookingId)
+        [Route("admin/booking/changestatus/{id}/{statusId}")]
+        public IActionResult UpdateStatus(long id, int statusId)
         {
             try
             {
-                Booking data = context.Bookings.Find(bookingId);
+                Booking data = context.Bookings.Find(id);
  
                 if (data == null)
                 {
