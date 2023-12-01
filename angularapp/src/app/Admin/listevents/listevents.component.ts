@@ -14,6 +14,9 @@ export class ListeventsComponent implements OnInit {
     this.as.getAllEvents().subscribe(data => {this.eventdata.push(...data)})
     console.log(this.eventdata)
    }
+
+   
+   
   
   ngOnInit() {
   }
