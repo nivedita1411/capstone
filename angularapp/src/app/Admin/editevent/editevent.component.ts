@@ -23,12 +23,25 @@ export class EditeventComponent implements OnInit {
   })
 
   onSubmit(){
-    const tid = this.ar.snapshot.paramMap.get('id')
-    this.id = Number(tid)
-    this.getPlayer(this.id)
+    this.editeventdata = this.editeventdataForm.value
+    console.log(this.editeventdata)
+    this.as.EditEvent(this.editeventdata).subscribe(
+      ()=>{
+        alert("Event Edited Successfully")
+      }
+    )
+    
+  }
+
+  getEventById(id:number)
+  {
+    this.as.getEventById(id).subscribe((data:Event) => this.editeventdata = data)
   }
 
   ngOnInit() {
+    const tid = this.ar.snapshot.paramMap.get('id')
+    this.id = Number(tid)
+    this.getEventById(this.id)
   }
 
 }
