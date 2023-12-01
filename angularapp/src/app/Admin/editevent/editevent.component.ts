@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-editevent',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditeventComponent implements OnInit {
 
-  constructor() { }
+  constructor(private as:AdminService, private route : Router) { }
 
   ngOnInit() {
   }

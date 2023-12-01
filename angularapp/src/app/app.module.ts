@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { ListeventsComponent } from './Admin/listevents/listevents.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EditeventComponent } from './Admin/editevent/editevent.component';
+import { AddeventComponent } from './Admin/addevent/addevent.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListeventsComponent,
-    EditeventComponent
+    EditeventComponent,
+    AddeventComponent
   ],
   imports: [
     BrowserModule,
