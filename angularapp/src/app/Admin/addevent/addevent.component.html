@@ -1,1 +1,69 @@
-<p>addevent works!</p>
+<!-- <p>addevent works!</p> -->
+
+<h1>Add Event</h1>
+<hr>
+<form #stdform='ngForm' (ngSubmit)="onSubmit()">
+
+    <label for="eventType">EventType</label>
+    <select id = "eventType">
+        <option value="conference">Conference</option>
+        <option value="inductionProgram">Induction Program</option>
+        <option value="productLaunch">Product Launch</option>
+        <option value="tradeShow">Trade Show</option>
+        <option value="appreciationCeremony">Appreciation Ceremony</option>
+        <option value="teamBuildingActivity">Team-building Activity</option>
+    </select>
+    <div>
+        <label for="firstname">First Name</label>
+        <input id="firstname" name="firstname" type="text" ngModel required #firstname="ngModel">
+        <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" style="color: red;">
+            <div *ngIf="firstname.errors.required">
+                First Name cannot be blank
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="lastname">Last Name</label>
+        <input id="lastnname" name="lastname" type="text" ngModel required maxlength="25" minlength="3"
+            #lastname="ngModel">
+        <div *ngIf="lastname.invalid && (lastname.dirty || lastname.touched)" style="color: red;">
+            <div *ngIf="lastname.errors.required">
+                Last Name cannot be blank
+            </div>
+            <div *ngIf="lastname.errors.maxlength">
+                Name not more than 30 chars
+            </div>
+            <div *ngIf="lastname.errors.minlength">
+                Name should be 5 chars
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="email">Email</label>
+        <input id="email" name="email" type="text" ngModel>
+    </div>
+    <div>
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="male" checked [(ngModel)]="gender">Male
+        <input type="radio" name="gender" value="female" [(ngModel)]="gender">Female
+    </div>
+    <div>
+        <label>Marrital Status:</label>
+        <!-- <input type="checkbox" name="ismarried" id="ismarried" [(ngModel)]="ismarried">Marrital Status -->
+        <input type="radio" name="ismarried" value="Married" [(ngModel)]="gender">Married
+        <input type="radio" name="ismarried" value="Unmarried" [(ngModel)]="gender">Unmarried
+    </div>
+    <div>
+        <label for="city">City</label>
+        <select id="city" name="city" [(ngModel)]="CityId">
+            <option value="1">Mumbai</option>
+            <option value="2">Pune</option>
+            <option value="3">Delhi</option>
+            <option value="4">Chennai</option>
+        </select>=
+
+    </div>
+    <div>
+        <input type="submit" value="Save">
+    </div>
+</form>
