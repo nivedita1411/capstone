@@ -11,7 +11,7 @@ export class ListeventsComponent implements OnInit {
   eventdata: Event[] = []
 
   constructor( private as : AdminService) {
-    this.as.getAllEvents().subscribe(data => {this.eventdata.push()})
+    this.as.getAllEvents().subscribe(data => {this.eventdata.push(...data)})
    }
   
   ngOnInit() {
