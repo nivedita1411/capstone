@@ -8,13 +8,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { EditeventComponent } from './Admin/editevent/editevent.component';
 import { AddeventComponent } from './Admin/addevent/addevent.component';
 import {ReactiveFormsModule } from '@angular/forms';
+import { DeleteeventComponent } from './Admin/deleteevent/deleteevent.component';
+import { ListbookingsComponent } from './Admin/listbookings/listbookings.component';
+import { ListpaymentsComponent } from './Admin/listpayments/listpayments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListeventsComponent,
     EditeventComponent,
-    AddeventComponent
+    AddeventComponent,
+    DeleteeventComponent,
+    ListbookingsComponent,
+    ListpaymentsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,34 @@
+<!-- <p>listbookings works!</p> -->
+<!-- <p>listevents works!</p> -->
+
+<div class = "container">
+    <div class = "jumbotron">
+        <h1>Payment Listing</h1>
+        <table class = "table">
+            <thead>
+                <th>User Name</th>
+                <th>Booking Date</th>
+                <th>Event Date</th>
+                <th>Description</th>
+                <th>Booking Status</th>
+                <th>Event Type</th>
+                <th>Head Count</th>
+                <th>Amount</th>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let m of paymentdata">
+                    <td> </td>
+                    <td> {{m.BookingDate}} </td>
+                    <td> {{m.eventDescription}} </td>
+                    <td> {{m.participantsCount}} </td>
+                    <td> {{m.eventCharges}} </td>
+                    
+                    <a [routerLink] = "['/updateevent/', m.eventId]">Edit</a>&nbsp;&nbsp;
+                    <a [routerLink] = "['/DeleteEvent/',m.id]">Delete</a>&nbsp;&nbsp;
+                </tr>
+            </tbody>
+        </table>
+
+        
+    </div>
+</div>
