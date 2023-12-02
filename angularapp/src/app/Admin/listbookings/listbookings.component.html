@@ -19,12 +19,18 @@
                 <tr *ngFor = "let m of paymentdata">
                     <td> </td>
                     <td> {{m.BookingDate}} </td>
-                    <td> {{m.eventDescription}} </td>
-                    <td> {{m.participantsCount}} </td>
-                    <td> {{m.eventCharges}} </td>
+                    <td> {{m.EventDate}} </td>
+                    <td> {{m.Description}} </td>
+                    <td>
+                        <select>
+                            <option value="1">Verified</option>
+                            <option value="2">Confirmed</option>
+                            <option value="3">Pending</option>
+                        </select>
+                    </td>
+                    <td> {{m.EventId}} </td>
+                    <td> {{m.Amount}} </td>
                     
-                    <a [routerLink] = "['/updateevent/', m.eventId]">Edit</a>&nbsp;&nbsp;
-                    <a [routerLink] = "['/DeleteEvent/',m.id]">Delete</a>&nbsp;&nbsp;
                 </tr>
             </tbody>
         </table>
