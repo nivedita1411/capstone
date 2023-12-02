@@ -1,0 +1,91 @@
+<!-- <h1>Search by Event Type</h1> -->
+<form (ngSubmit)="onSubmit()" [formGroup]="searchByTypeForm">
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>Search By Event Type : </h3>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="eventType">Select Event Type</label>
+          <select id="eventType" formControlName="eventType" class="form-group">
+            <option *ngFor="let type of eventTypes" [value]="type">{{ type }}</option>
+          </select>
+        </div>
+        
+      </div>
+
+    </div>
+
+  </div>
+  
+  <br>
+  <p>
+    <button type="submit">Search</button>
+  </p>
+</form>
+
+<div *ngIf="eventList.length > 0">
+  <h2>Events</h2>
+  <div *ngFor="let event of eventList">
+    <!-- Display event details in cards or any preferred format -->
+    <div class="container" class="row" class="col-md-6">
+      <div class="jumbotron">
+        <p>Event Type : {{event.eventType}}</p>
+        <p>Description : {{event.eventDescription}}</p>
+        <p>Total Package: {{event.amount}}</p>
+        <p>Participants Count : {{event.participantsCount}}</p>
+        <p>Charges : {{event.eventCharges}}</p>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!-- <div *ngIf="eventList.length === 0 && searchByTypeForm.dirty">
+  <p>No events found</p>
+</div> -->
+
+<div *ngIf="noEventsFound && !isLoading">
+  <p>No events found</p>
+</div>
+<div *ngIf="isLoading">
+  <p>Loading...</p>
+</div>
+
+
+<!-- <h1>Event Listing</h1>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h3>Search By Event Type : </h3>
+    </div>
+    <div class="col">
+      <div class="form-group">
+        <select class="form-control">
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+          <option value="option1">Option 4</option>
+          <option value="option2">Option 5</option>
+          <option value="option3">Option 6</option>
+          <option value="option1">Option 7</option>
+          <option value="option2">Option 8</option>
+          <option value="option3">Option 9</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+ 
+<div class="container" class="row" class="col-md-6">
+  <div class="jumbotron">
+        <h5>Event Type: </h5>
+        <h5>Description: </h5>
+        <h5>Total Package: </h5>
+        <h5>Participant Count: </h5>
+        <h5>Charges </h5>
+      </div>
+    </div> -->

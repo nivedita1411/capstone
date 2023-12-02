@@ -18,9 +18,9 @@
             <tbody>
                 <tr *ngFor = "let m of paymentdata">
                     <td> </td>
-                    <td> {{m.BookingDate}} </td>
-                    <td> {{m.EventDate}} </td>
-                    <td> {{m.Description}} </td>
+                    <td> {{m.bookingDate}} </td>
+                    <td> {{m.eventDate}} </td>
+                    <td> {{m.description}} </td>
                     <td>
                         <select>
                             <option value="1">Verified</option>
@@ -28,8 +28,8 @@
                             <option value="3">Pending</option>
                         </select>
                     </td>
-                    <td> {{m.EventId}} </td>
-                    <td> {{m.Amount}} </td>
+                    <td> {{m.eventId}} </td>
+                    <td> {{m.amount}} </td>
                     
                 </tr>
             </tbody>

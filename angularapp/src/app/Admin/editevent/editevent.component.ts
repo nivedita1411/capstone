@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Event } from 'src/app/models/event';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -10,27 +11,23 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class EditeventComponent implements OnInit {
 
-  editeventdata : any
-  id:number
+  
   constructor(private as:AdminService, private route : Router, private fb : FormBuilder, private ar: ActivatedRoute) { 
+  }  
+
+  editeventdata : Event = 
+  { id:0,
+    eventType:'',
+    eventDescription:'',
+    participantsCount:0,
+    eventCharges:0
   }
+  id:number
 
-  editeventdataForm = this.fb.group({
-    eventType: [''],
-    eventDescription: [''],
-    participantsCount: [''],
-    eventCharges: ['']
-  })
-
-  onSubmit(){
-    this.editeventdata = this.editeventdataForm.value
-    console.log(this.editeventdata)
-    this.as.EditEvent(this.editeventdata).subscribe(
-      ()=>{
-        alert("Event Edited Successfully")
-      }
-    )
-    
+  ngOnInit() {
+    const tid = this.ar.snapshot.paramMap.get('id')
+    this.id = Number(tid)
+    this.getEventById(this.id)
   }
 
   getEventById(id:number)
@@ -38,10 +35,14 @@ export class EditeventComponent implements OnInit {
     this.as.getEventById(id).subscribe((data:Event) => this.editeventdata = data)
   }
 
-  ngOnInit() {
-    const tid = this.ar.snapshot.paramMap.get('id')
-    this.id = Number(tid)
-    this.getEventById(this.id)
+  onSubmit(event : Event)
+  {
+    this.editeventdata = event
+    this.as.EditEvent(this.editeventdata, this.id).subscribe(()=>
+    {
+      alert("Event Edited Successfully")
+      this.route.navigate(['Admin/event'])
+    })
   }
 
 }

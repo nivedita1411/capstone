@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Payment } from 'src/app/models/payment';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-listpayments',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListpaymentsComponent implements OnInit {
 
-  constructor() { }
+  paymentdata: Payment[] = []
+
+  constructor(private as: AdminService) { 
+    this.as.getAllPayments().subscribe(data => {this.paymentdata.push(...data)})
+    console.log(this.paymentdata)
+  }
 
   ngOnInit() {
   }

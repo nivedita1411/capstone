@@ -7,10 +7,11 @@ import { ListeventsComponent } from './Admin/listevents/listevents.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EditeventComponent } from './Admin/editevent/editevent.component';
 import { AddeventComponent } from './Admin/addevent/addevent.component';
-import {ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeleteeventComponent } from './Admin/deleteevent/deleteevent.component';
 import { ListbookingsComponent } from './Admin/listbookings/listbookings.component';
 import { ListpaymentsComponent } from './Admin/listpayments/listpayments.component';
+import { EventbytypeComponent } from './Admin/eventbytype/eventbytype.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +21,15 @@ import { ListpaymentsComponent } from './Admin/listpayments/listpayments.compone
     AddeventComponent,
     DeleteeventComponent,
     ListbookingsComponent,
-    ListpaymentsComponent
+    ListpaymentsComponent,
+    EventbytypeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 <!-- <p>editevent works!</p> -->
 
-<h2>Edit Event</h2>
+<!-- <h2>Edit Event</h2>
 <hr>
 <form [formGroup]="editeventdataForm" (ngSubmit)="onSubmit()">
 
@@ -31,6 +31,50 @@
         <input id="eventCharges" name="eventCharges" type="text" formControlName="eventCharges">
     </div>
     
-    <button type="submit">Submit</button>
+    
+</form> -->
+
+<h2>Edit Event</h2>
+<hr>
+<form (ngSubmit)="onSubmit(editeventdata)" #editeventform="ngForm" >
+    <div>
+        <label for="eventId">Event ID</label>
+        <input type="text" id="eventId" name="eventId" readonly [(ngModel)]="editeventdata.eventId">
+    </div>
+
+    <div>
+        <label for="eventType">Event Type</label>
+        <select id = "eventType">
+            <option value="1">Conference</option>
+            <option value="2">Induction Program</option>
+            <option value="3">Product Launch</option>
+            <option value="4">Trade Show</option>
+            <option value="5">Appreciation Ceremony</option>
+            <option value="6">Team-building Activity</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="eventDescription">Event Description</label>
+        <textarea id="eventDescription" name="eventDescription" type="text" placeholder="Enter Event Description"
+        [(ngModel)]="editeventdata.eventDescription" required #eventDescription="ngModel" ></textarea>
+    </div>
+
+    <div>
+        <label for="participantsCount">Participant Count</label>
+        <input id="participantsCount" name="participantsCount" type="text" placeholder="Enter participants Count"
+        [(ngModel)]="editeventdata.participantsCount" required #participantsCount="ngModel" >
+    </div>
+
+    <div>
+        <label for="eventCharges">Event Charges</label>
+        <input id="eventCharges" name="eventCharges" type="text" placeholder="Enter Event Charges"
+        [(ngModel)]="editeventdata.eventCharges" required #eventCharges="ngModel" >
+    </div>
+    
+   
+    <p>
+        <button type="submit">Submit</button>
+    </p>
 </form>
     

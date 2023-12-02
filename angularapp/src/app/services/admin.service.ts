@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Event } from '../models/event';
+import { Event  } from '../models/event';
 
 @Injectable({
   providedIn: 'root'
@@ -33,14 +33,14 @@ export class AdminService {
     return this.httpclient.post<any>(this.apiUrl + '/event',eventdata, this.httpOptions)
   }
 
-  EditEvent(eventdata : Event) : Observable<any>
+  EditEvent(eventdata: Event, id:number) : Observable<any>
   {
-    return this.httpclient.put(this.apiUrl + '/admin/updateevent' + eventdata.eventId, eventdata,this.httpOptions)
+    return this.httpclient.put<any>(this.apiUrl + '/admin/updateevent/'+ id,eventdata,this.httpOptions)
   }
 
   DeleteEvent(id : number) : Observable<any>
   {
-    return this.httpclient.delete<any>(this.apiUrl + '/deleteevent' + id )
+    return this.httpclient.delete<any>(this.apiUrl + '/deleteevent/' + id )
   }
 
   updateStatus(id1:number, id2:number, eventdata: Event) : Observable<any>

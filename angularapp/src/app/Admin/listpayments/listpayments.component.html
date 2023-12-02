@@ -1,1 +1,28 @@
-<p>listpayments works!</p>
+<!-- <p>listpayments works!</p> -->
+
+<div class = "container">
+    <div class = "jumbotron">
+        <h1>Event Listing</h1>
+        <table class = "table">
+            <thead>
+                <th>Id</th>
+                <th>Payment Amount</th>
+                <th>Payment Date</th>
+                <th>Mode of Payment</th>
+                <th>Booking ID</th>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let m of paymentdata">
+                    <td> {{m.paymentId}} </td>
+                    <td> {{m.amount}} </td>
+                    <td> {{m.paymentDate}} </td>
+                    <td> {{m.modeOfPayment}} </td>
+                    <td> {{m.bookingId}} </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+
+        
+    </div>
+</div>
