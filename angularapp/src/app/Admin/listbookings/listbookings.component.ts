@@ -12,7 +12,7 @@ export class ListbookingsComponent implements OnInit {
   paymentdata: Payment[]=[]
 
   constructor(private as:AdminService) {
-    this.as.getAllPayments().subscribe(data => {this.paymentdata.push(...data)})
+    this.as.getAllBookings().subscribe(data => {this.paymentdata.push(...data)})
     console.log(this.paymentdata)
    }
 
