@@ -50,6 +50,7 @@
     display: block;
     margin-bottom: 5px;
     text-align: center;
+    font-weight: bold;
   }
  
   .form-container .form-group input {
@@ -78,7 +79,7 @@
     align-self: center;
     font-family: inherit;
     color: #fff;
-    background-color: goldenrod;
+    background-color: rgb(218, 125, 32);
     border: none;
     width: 20%;
     padding: 12px 16px;
@@ -88,7 +89,7 @@
     cursor: pointer;
     border-radius: 6px;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.084), 0px 2px 3px rgba(0, 0, 0, 0.168);
-    margin-left: 40;
+    margin-left: 40%;
   }
  
   .form-container .form-submit-btn:hover {
