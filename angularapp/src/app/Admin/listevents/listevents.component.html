@@ -1,5 +1,7 @@
 <!-- <p>listevents works!</p> -->
 
+
+
 <div class = "container">
     <div class = "jumbotron">
         <h1>Event Listing</h1>
@@ -10,23 +12,25 @@
                 <th>Event Description</th>
                 <th>Participant Count</th>
                 <th>Event Charges</th>
-                <th>
-                </th>
+                <th></th>
                 <th></th>
             </thead>
             <tbody>
-                <tr *ngFor = "let m of eventdata">
-                    <td> {{m.eventId}} </td>
-                    <td> {{m.eventType}} </td>
-                    <td> {{m.eventDescription}} </td>
-                    <td> {{m.participantsCount}} </td>
-                    <td> {{m.eventCharges}} </td>
-                    <td>
-                        <a [routerLink] = "['/updateevent/', m.eventId]">Edit</a>&nbsp;&nbsp;
-                    </td>
-                    <td>
-                        <a [routerLink] = "['/updatedeletestatus/',m.eventId]">Delete</a>&nbsp;&nbsp;
-                    </td>
+                <div
+                <tr *ngFor = "let m of eventdata" *ngIf = "m.isDelete==true">
+
+                    
+                        <td> {{m.eventId}} </td>
+                        <td> {{m.eventType}} </td>
+                        <td> {{m.eventDescription}} </td>
+                        <td> {{m.participantsCount}} </td>
+                        <td> {{m.eventCharges}} </td>
+                        <td>
+                            <a [routerLink] = "['/updateevent/', m.eventId]">Edit</a>&nbsp;&nbsp;
+                        </td>
+                        <td>
+                            <a [routerLink] = "['/updatedeletestatus/',m.eventId]">Delete</a>&nbsp;&nbsp;
+                        </td>
                     
                 </tr>
             </tbody>

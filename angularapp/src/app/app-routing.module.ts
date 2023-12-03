@@ -15,7 +15,7 @@ const routes: Routes = [
   {path:'updateevent/:id',component:EditeventComponent},
   {path:'listpayments',component:ListpaymentsComponent},
   {path:'listbookings',component:ListbookingsComponent},
-  {path:'deleteevent/:id',component:DeleteeventComponent},
+  {path:'updatedeletestatus/:id',component:DeleteeventComponent},
   {path:'searchbytype', component:EventbytypeComponent}
 ];
 
