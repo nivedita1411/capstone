@@ -30,7 +30,7 @@
   <h2>Events</h2>
   <div *ngFor="let event of eventList">
     <!-- Display event details in cards or any preferred format -->
-    <div class="card-container" class="row" class="col-md-6">
+    <div class="card" class="card-container" class="row" class="col-md-6">
       <div class="card">
         <div class="card-content">
         <p>Event Type : {{event.eventType}}</p>
@@ -38,7 +38,8 @@
         <p>Total Package: {{event.amount}}</p>
         <p>Participants Count : {{event.participantsCount}}</p>
         <p>Charges : {{event.eventCharges}}</p>
-        <button> </button>
+        <button>Edit Event</button>
+        <button>Delete Event</button>
       </div>
       </div>
       
