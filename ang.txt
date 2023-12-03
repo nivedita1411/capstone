@@ -1812,3 +1812,34 @@ export class DeleteBookingComponent implements OnInit {
     }
   }
 }
+
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+
+[Route("api/[controller]")]
+[ApiController]
+public class EventsController : ControllerBase
+{
+    private readonly List<Event> _events = new List<Event>
+    {
+        new Event { Id = 1, EventType = "Conference", EventDescription = "Sample Conference", ParticipantsCount = 100, EventCharges = 50, IsDelete = false },
+        // Add other events
+    };
+
+    // PUT: api/events/5
+    [HttpPut("{id}")]
+    public IActionResult PutEvent(int id, Event updatedEvent)
+    {
+        var existingEvent = _events.FirstOrDefault(e => e.Id == id);
+        if (existingEvent == null)
+        {
+            return NotFound();
+        }
+
+        // Update the existing event's isDelete property
+        existingEvent.IsDelete = updatedEvent.IsDelete;
+
+        return NoContent(); // Returns 204 No Content on success
+    }
+}
