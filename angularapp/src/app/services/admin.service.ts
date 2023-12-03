@@ -38,9 +38,9 @@ export class AdminService {
     return this.httpclient.put<any>(this.apiUrl + '/admin/updateevent/'+ id,eventdata,this.httpOptions)
   }
 
-  DeleteEvent(id : number) : Observable<any>
+  DeleteEvent(id : number) : Observable<Event>
   {
-    return this.httpclient.put<any>(this.apiUrl + '/updatedeletestatus/' + id,)
+    return this.httpclient.put<Event>(this.apiUrl + '/updatedeletestatus/' + id,{})
   }
 
   updateStatus(id1:number, id2:number, eventdata: Event) : Observable<any>
