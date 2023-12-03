@@ -10,9 +10,9 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class DeleteeventComponent implements OnInit {
 
-  isDelete: boolean = false;
-
   constructor(private as:AdminService, private ar: ActivatedRoute, private route: Router) { }
+
+  isDelete:boolean
 
   eventdata : Event = 
   { id:0,
@@ -20,7 +20,7 @@ export class DeleteeventComponent implements OnInit {
     eventDescription:'',
     participantsCount:0,
     eventCharges:0,
-    isDelete:false
+    isDelete:true
   }
   id:number
   
@@ -32,7 +32,7 @@ export class DeleteeventComponent implements OnInit {
 
   deleteEvent(): void {
     this.as.DeleteEvent(this.eventdata,this.id).subscribe(() => {
-      this.isDelete = true; // Set isDelete to true after successful update
+      this.isDelete = false; // Set isDelete to true after successful update
     });
   }
 
@@ -58,3 +58,5 @@ export class DeleteeventComponent implements OnInit {
   }
 
 }
+
+
