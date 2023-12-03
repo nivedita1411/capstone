@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -13,10 +14,18 @@ export class EventbytypeComponent implements OnInit {
   eventList: any[] = [];
   eventTypes: string[] = ['conference', 'inductionProgram', 'productLaunch', 'tradeShow', 'appreciationCeremony', 'teamBuildingActivity'];
 
-  constructor(private as : AdminService, private fb : FormBuilder) { 
+  constructor(private as : AdminService, private fb : FormBuilder, private router: Router) { 
     this.searchByTypeForm = this.fb.group({
       eventType: ['']
     });
+  }
+
+  redirectToEditEvent(){
+    this.router.navigate(['/editevent/:id'])
+  }
+
+  redirectToDeleteEvent(){
+    this.router.navigate(['/deleteevent/:id'])
   }
   
   onSubmit() {

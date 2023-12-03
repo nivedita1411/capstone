@@ -39,9 +39,9 @@
         <p>Participants Count : {{event.participantsCount}}</p>
         <p>Charges : {{event.eventCharges}}</p>
         <br>
-        <a href="/" class="blue-button">Edit Event</a>
+        <button (click)="redirectToEditEvent()" class="blue-button">Edit Event</button>
         <br>
-        <a href="/" class="blue-button">Delete Event</a>
+        <button (click)="redirectToDeleteEvent()"  class="blue-button">Delete Event</button>
       </div>
       </div>
       
