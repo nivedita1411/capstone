@@ -2,6 +2,7 @@
 <hr>
 
 <div class="form-container">
+
     <form [formGroup]="eventdataForm" (ngSubmit)="onSubmit()">
 
         <div class="form-group">
@@ -31,7 +32,7 @@
             <input id="eventCharges" name="eventCharges" type="text" formControlName="eventCharges">
         </div>
         
-        <button class="form-submit-btn" type="submit" style="color: #A5D7E8;">Submit</button>
+        <button style="align-items: center; align-self: center;" class="form-submit-btn" type="submit" style="color: #A5D7E8;">Submit</button>
     </form>
 </div>
 
