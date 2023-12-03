@@ -32,7 +32,9 @@ export class DeleteeventComponent implements OnInit {
 
   deleteEvent(): void {
     this.as.DeleteEvent(this.eventdata,this.id).subscribe(() => {
-      this.isDelete = false; // Set isDelete to true after successful update
+      this.isDelete = false;
+       // Set isDelete to true after successful update
+       this.route.navigate(['Admin/event'])
     });
   }
 

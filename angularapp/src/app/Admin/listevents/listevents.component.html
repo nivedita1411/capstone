@@ -16,10 +16,8 @@
                 <th></th>
             </thead>
             <tbody>
-                <div
-                <tr *ngFor = "let m of eventdata" *ngIf = "m.isDelete==true">
-
-                    
+                <div *ngFor = "let m of eventdata">
+                    <tr *ngIf = "m.isDelete==true">
                         <td> {{m.eventId}} </td>
                         <td> {{m.eventType}} </td>
                         <td> {{m.eventDescription}} </td>
@@ -33,6 +31,8 @@
                         </td>
                     
                 </tr>
+                </div>
+                
             </tbody>
         </table>
 
