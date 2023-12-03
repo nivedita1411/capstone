@@ -1,10 +1,57 @@
 <h2>Add Event</h2>
 <hr>
-<form [formGroup]="eventdataForm" (ngSubmit)="onSubmit()">
 
-    <div>
+<div class="form-container">
+    <form [formGroup]="eventdataForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+            <label for="eventType">Event Type</label>
+            <select id = "eventType" formControlName="eventType">
+                <option value="conference">Conference</option>
+                <option value="inductionProgram">Induction Program</option>
+                <option value="productLaunch">Product Launch</option>
+                <option value="tradeShow">Trade Show</option>
+                <option value="appreciationCeremony">Appreciation Ceremony</option>
+                <option value="teamBuildingActivity">Team-building Activity</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label for="eventDescription">Event Description</label>
+            <textarea id="eventDescription" name="eventDescription" type="text" formControlName="eventDescription"></textarea>
+        </div>
+    
+        <div class="form-group">
+            <label for="participantsCount">Participant Count</label>
+            <input id="participantsCount" name="participantsCount" formControlName="participantsCount">
+        </div>
+    
+        <div class="form-group">
+            <label for="eventCharges">Event Charges</label>
+            <input id="eventCharges" name="eventCharges" type="text" formControlName="eventCharges">
+        </div>
+        
+        <button class="form-submit-btn" type="submit" style="color: #A5D7E8;">Submit</button>
+    </form>
+</div>
+
+
+<!-- <div class="container">
+ 
+ 
+    <div class="form-container">
+        <div class="logo-container">
+            Add Event
+          </div>
+    <form [formGroup]="eventdataForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="eventId">Event ID</label>
+            <input type="text" id="eventId" name="eventId" readonly [(ngModel)]="editeventdata.eventId">
+        </div>
+ 
+    <div class="form-group">
         <label for="eventType">Event Type</label>
-        <select id = "eventType" formControlName="eventType">
+        <select id = "eventType" formControlName="eventType" [(ngModel)]="editeventdata.eventType" required #eventType="ngModel">
             <option value="conference">Conference</option>
             <option value="inductionProgram">Induction Program</option>
             <option value="productLaunch">Product Launch</option>
@@ -13,22 +60,25 @@
             <option value="teamBuildingActivity">Team-building Activity</option>
         </select>
     </div>
-
-    <div>
+ 
+    <div class="form-group">
         <label for="eventDescription">Event Description</label>
-        <textarea id="eventDescription" name="eventDescription" type="text" formControlName="eventDescription"></textarea>
+        <textarea id="eventDescription" name="eventDescription" type="text" formControlName="eventDescription" [(ngModel)]="editeventdata.participantsCount" required #participantsCount="ngModel"></textarea>
     </div>
-
-    <div>
+ 
+    <div class="form-group">
         <label for="participantsCount">Participant Count</label>
-        <input id="participantsCount" name="participantsCount" formControlName="participantsCount">
+        <input id="participantsCount" name="participantsCount" formControlName="participantsCount" [(ngModel)]="editeventdata.participantsCount" required #participantsCount="ngModel">
     </div>
-
-    <div>
+ 
+    <div class="form-group">
         <label for="eventCharges">Event Charges</label>
-        <input id="eventCharges" name="eventCharges" type="text" formControlName="eventCharges">
+        <input id="eventCharges" name="eventCharges" type="text" formControlName="eventCharges"  [(ngModel)]="editeventdata.eventCharges" required #eventCharges="ngModel">
     </div>
-    
-    <button type="submit">Submit</button>
+   
+    <button class="form-submit-btn" type="submit" style="color: #A5D7E8;">Submit</button>
 </form>
+</div>
+     
+</div> -->
     
