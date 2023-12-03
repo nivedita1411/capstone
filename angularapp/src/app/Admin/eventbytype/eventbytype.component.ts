@@ -21,7 +21,7 @@ export class EventbytypeComponent implements OnInit {
   }
 
   redirectToEditEvent(){
-    this.router.navigate(['/editevent/:id'])
+    this.router.navigate(['/updateevent/:id'])
   }
 
   redirectToDeleteEvent(){

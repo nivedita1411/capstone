@@ -28,7 +28,7 @@
 }
 .card{
     width:325px;
-    background-color: #f0f0f0;
+    background-color: rgba(229, 192, 255, 0.743);
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
@@ -46,9 +46,9 @@
 .blue-button{
     display:inline-block;
     padding: 10px 20px;
-    background-color:blue;
+    background-color: purple;
     text-decoration: none;
-    border: 1px solid blue;
+    border: 1px solid purple;
     border-radius: 5px;
     text-align: center;
     font-size: 16px;
@@ -57,8 +57,8 @@
     color: white;
 }
 .blue-button:hover{
-    background-color: darkblue;
-    border-color: darkblue;
+    background-color: darkmagenta;
+    border-color: darkmagenta;
 }
 .dropdown
 {
