@@ -2,10 +2,10 @@
 
 <h2>Delete Event</h2>
 <hr>
-<form (ngSubmit)="onSubmit(editeventdata)" #editeventform="ngForm" >
-    <div>
-        <label for="eventId">Event ID</label>
-        <input type="text" id="eventId" name="eventId" readonly [(ngModel)]="editeventdata.eventId">
+
+    <!-- <div>
+        <label for="id">Event ID</label>
+        <input type="text" id="id" name="id" readonly [(ngModel)]="eventdata.id">
     </div>
 
     <div>
@@ -17,26 +17,25 @@
             <option value="4">Trade Show</option>
             <option value="5">Appreciation Ceremony</option>
             <option value="6">Team-building Activity</option> -->
-        </select>
+        <!-- </select>
     </div>
 
     <div>
         <label for="eventDescription">Event Description</label>
-        <textarea id="eventDescription" name="eventDescription" type="text" readonly [(ngModel)]="editeventdata.eventDescription"></textarea>
+        <textarea id="eventDescription" name="eventDescription" type="text" readonly [(ngModel)]="eventdata.eventDescription"></textarea>
     </div>
 
     <div>
         <label for="participantsCount">Participant Count</label>
-        <input id="participantsCount" name="participantsCount" type="text" placeholder="Enter participants Count" [(ngModel)]="editeventdata.participantsCount" readonly >
+        <input id="participantsCount" name="participantsCount" type="text" placeholder="Enter participants Count" [(ngModel)]="eventdata.participantsCount" readonly >
     </div>
 
     <div>
         <label for="eventCharges">Event Charges</label>
-        <input id="eventCharges" name="eventCharges" type="text" readonly [(ngModel)]="editeventdata.eventCharges" >
-    </div>
+        <input id="eventCharges" name="eventCharges" type="text" readonly [(ngModel)]="eventdata.eventCharges" >
+    </div> --> 
     
    
     <p>
         <button type="submit">Delete</button>
     </p>
-</form>
