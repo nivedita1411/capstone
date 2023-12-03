@@ -31,9 +31,9 @@ export class DeleteeventComponent implements OnInit {
   }
 
   deleteEvent(): void {
-    // Code to delete the booking goes here
-    // Once the booking is successfully deleted, set isDelete flag to true
-    this.isDelete = true;
+    this.as.DeleteEvent(this.eventdata,this.id).subscribe(() => {
+      this.isDelete = true; // Set isDelete to true after successful update
+    });
   }
 
   getEventById(id:number)
