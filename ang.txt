@@ -1783,4 +1783,32 @@ namespace EmpApi.Models
     // var data = context.Employees.ToList();
     var data = context.Employees.Include("Dept").ToList();
     return View(data);
+
+
+
+  selector: 'app-delete-booking',
+  templateUrl: './delete-booking.component.html',
+  styleUrls: ['./delete-booking.component.css']
+})
+export class DeleteBookingComponent implements OnInit {
+  isDelete: boolean = false;
+ 
+  constructor(private bookingService: BookingService) { }
+ 
+  ngOnInit(): void {
+  }
+ 
+  deleteBooking(): void {
+    // Code to delete the booking goes here
+    // Once the booking is successfully deleted, set isDelete flag to true
+    this.isDelete = true;
+  }
+ 
+  showAlert(): void {
+    // Code to show the alert goes here
+    // After clicking on "Ok" button, call deleteBooking() method
+    if (confirm("Are you sure you want to delete the booking?")) {
+      this.deleteBooking();
+    }
+  }
 }
