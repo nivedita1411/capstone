@@ -20,7 +20,8 @@ export class EditeventComponent implements OnInit {
     eventType:'',
     eventDescription:'',
     participantsCount:0,
-    eventCharges:0
+    eventCharges:0,
+    isDelete:false
   }
   id:number
 
