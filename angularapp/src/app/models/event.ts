@@ -4,5 +4,6 @@ export interface Event {
     eventDescription:string
     participantsCount:number
     eventCharges:number
+    // isDelete:boolean
 }
 

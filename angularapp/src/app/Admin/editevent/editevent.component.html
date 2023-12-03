@@ -41,14 +41,14 @@
         <h2>Edit Event</h2>
     </div>
     <form (ngSubmit)="onSubmit(editeventdata)" #editeventform="ngForm" >
-        <div>
+        <!-- <div>
             <label for="eventId">Event ID</label>
             <input type="text" id="eventId" name="eventId" readonly [(ngModel)]="editeventdata.eventId">
-        </div>
+        </div> -->
     
         <div class="form-group">
             <label for="eventType">Event Type</label>
-            <select id = "eventType">
+            <select id = "eventType" class="form-group">
                 <option value="1">Conference</option>
                 <option value="2">Induction Program</option>
                 <option value="3">Product Launch</option>

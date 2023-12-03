@@ -10,6 +10,9 @@
                 <th>Event Description</th>
                 <th>Participant Count</th>
                 <th>Event Charges</th>
+                <th>
+                </th>
+                <th></th>
             </thead>
             <tbody>
                 <tr *ngFor = "let m of eventdata">
@@ -18,9 +21,13 @@
                     <td> {{m.eventDescription}} </td>
                     <td> {{m.participantsCount}} </td>
                     <td> {{m.eventCharges}} </td>
+                    <td>
+                        <a [routerLink] = "['/updateevent/', m.eventId]">Edit</a>&nbsp;&nbsp;
+                    </td>
+                    <td>
+                        <a [routerLink] = "['/deleteevent/',m.id]">Delete</a>&nbsp;&nbsp;
+                    </td>
                     
-                    <a [routerLink] = "['/updateevent/', m.eventId]">Edit</a>&nbsp;&nbsp;
-                    <a [routerLink] = "['/deleteevent/',m.id]">Delete</a>&nbsp;&nbsp;
                 </tr>
             </tbody>
         </table>
