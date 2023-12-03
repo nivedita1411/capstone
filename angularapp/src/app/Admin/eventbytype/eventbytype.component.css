@@ -1,11 +1,24 @@
 *{
-    margin:0px;
+    margin:10px;
     padding:0px;
     box-sizing: border-box;
     font-family: sans-serif;
 }
 .body{
     background-color: #f0f0f0;
+}
+.search-button{
+    display:inline-block;
+    padding: 10px 20px;
+    background-color:blue;
+    text-decoration: none;
+    border: 1px solid blue;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 16px;
+    color: white;
 }
 .card-container{
     display:flex;
