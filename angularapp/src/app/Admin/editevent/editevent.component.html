@@ -42,7 +42,7 @@
         <input type="text" id="eventId" name="eventId" readonly [(ngModel)]="editeventdata.eventId">
     </div>
 
-    <div>
+    <div class="f">
         <label for="eventType">Event Type</label>
         <select id = "eventType">
             <option value="1">Conference</option>
@@ -54,19 +54,19 @@
         </select>
     </div>
 
-    <div>
+    <div class="f">
         <label for="eventDescription">Event Description</label>
         <textarea id="eventDescription" name="eventDescription" type="text" placeholder="Enter Event Description"
         [(ngModel)]="editeventdata.eventDescription" required #eventDescription="ngModel" ></textarea>
     </div>
 
-    <div>
+    <div class="f">
         <label for="participantsCount">Participant Count</label>
         <input id="participantsCount" name="participantsCount" type="text" placeholder="Enter participants Count"
         [(ngModel)]="editeventdata.participantsCount" required #participantsCount="ngModel" >
     </div>
 
-    <div>
+    <div class="f">
         <label for="eventCharges">Event Charges</label>
         <input id="eventCharges" name="eventCharges" type="text" placeholder="Enter Event Charges"
         [(ngModel)]="editeventdata.eventCharges" required #eventCharges="ngModel" >
@@ -77,4 +77,5 @@
         <button type="submit">Submit</button>
     </p>
 </form>
-    
+     class
+="f"
